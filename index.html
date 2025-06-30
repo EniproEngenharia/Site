@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Construtora - Construindo o Futuro</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones: Lucide.dev -->
+    <script src="https://unpkg.com/lucide-react@0.292.0/dist/lucide-react.js"></script>
+
+
+    <style>
+        /* Estilo customizado para usar a fonte Poppins */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Efeito de sublinhado animado para os links do menu */
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #16a34a; /* Verde primário (green-600) */
+            transition: width .3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .hero-section {
+            background-image: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrN8MH6i4AY9XQJ1g0Vce8xJ8lA4L8BMlWW6lZIXQMn9Ut2c1g778KSvJmkH_vyf1RvKSQElI53vhVZ3ysochz3DlIDp_T_1lGheEWdPJw1uqsTPQdmUa1LjexQdWQVkXLJyHE=s1360-w1360-h1020-rw');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- CABEÇALHO E NAVEGAÇÃO -->
+    <header id="header" class="bg-white shadow-md fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNz7dDYKuC5jH5PJSUP4pvB31MC7JzRRz8w9k4Q37uMp4EQ9uzGubYa4OhHpfwpI0R-XIzhNYBVIwI0pSR0xpmVWAQ0EWcJ2Y9VVSu7oylzCdHHia9ueDT3Cf6nw3bxvjIqO-PuRot036FH7pOeN68=w400-h400-s-no-gm?authuser=1" alt="Logo da Construtora" class="h-12 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#inicio" class="nav-link text-gray-600 hover:text-green-600 font-medium">Início</a>
+                <a href="#sobre" class="nav-link text-gray-600 hover:text-green-600 font-medium">Sobre Nós</a>
+                <a href="#empreendimentos" class="nav-link text-gray-600 hover:text-green-600 font-medium">Empreendimentos</a>
+                <a href="#contato" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors">Contato</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Início</a>
+            <a href="#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Sobre Nós</a>
+            <a href="#empreendimentos" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Empreendimentos</a>
+            <a href="#contato" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Contato</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SEÇÃO HERO -->
+        <section id="inicio" class="hero-section h-screen flex items-center justify-center text-white relative">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto px-6 text-center z-10">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-fade-in-down">Construindo Sonhos, Realizando Futuros</h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in-up">Projetos que inspiram confiança e transformam o horizonte da cidade.</p>
+                <a href="#empreendimentos" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105">Conheça Nossos Projetos</a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE NÓS -->
+        <section id="sobre" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="wow animate__animated animate__fadeInLeft">
+                        <img src="https://placehold.co/600x400/e2e8f0/2d3748?text=Nossa+Equipe" alt="Equipe da construtora" class="rounded-lg shadow-2xl w-full">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Mais de 20 Anos de Excelência</h2>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Desde 2003, nossa construtora tem sido sinônimo de qualidade e inovação. Com uma trajetória marcada por projetos bem-sucedidos, combinamos tradição e tecnologia para entregar empreendimentos que superam as expectativas.
+                        </p>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            Nossa missão é criar espaços que promovam qualidade de vida, segurança e valorização, sempre com um profundo respeito pelo meio ambiente e pela comunidade.
+                        </p>
+                        <div class="flex space-x-6">
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-green-600">+50</p>
+                                <p class="text-gray-500">Projetos Entregues</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-green-600">+1.200</p>
+                                <p class="text-gray-500">Clientes Satisfeitos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO EMPREENDIMENTOS -->
+        <section id="empreendimentos" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">Nossos Empreendimentos</h2>
+                    <p class="text-gray-700 mt-2">Conheça os projetos que definem nosso padrão de qualidade.</p>
+                </div>
+                
+                <!-- Filtros -->
+                <div id="project-filters" class="flex justify-center space-x-2 md:space-x-4 mb-10">
+                    <button class="filter-btn active bg-green-600 text-white px-4 py-2 rounded-full" data-filter="all">Todos</button>
+                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="residencial">Residencial</button>
+                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="comercial">Comercial</button>
+                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="industrial">Industrial</button>
+                </div>
+
+                <div id="project-gallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Projeto 1 -->
+                    <div class="project-item residencial" data-category="residencial">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/34d399/ffffff?text=Residencial+Vista+Alegre" alt="Residencial Vista Alegre" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Residencial Vista Alegre</h3>
+                                <p class="text-sm text-gray-500 mb-4">São Paulo, SP</p>
+                                <p class="text-gray-700 text-sm">Apartamentos de alto padrão com vista panorâmica e lazer completo.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Projeto 2 -->
+                     <div class="project-item comercial" data-category="comercial">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/6ee7b7/000000?text=Centro+Empresarial+Connect" alt="Centro Empresarial Connect" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Centro Empresarial Connect</h3>
+                                <p class="text-sm text-gray-500 mb-4">Rio de Janeiro, RJ</p>
+                                <p class="text-gray-700 text-sm">Salas comerciais modernas em localização estratégica para o seu negócio.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Projeto 3 -->
+                     <div class="project-item residencial" data-category="residencial">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/10b981/ffffff?text=Condomínio+Vila+das+Flores" alt="Condomínio Vila das Flores" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Condomínio Vila das Flores</h3>
+                                <p class="text-sm text-gray-500 mb-4">Belo Horizonte, MG</p>
+                                <p class="text-gray-700 text-sm">Casas com design exclusivo, segurança e contato com a natureza.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Projeto 4 -->
+                     <div class="project-item industrial" data-category="industrial">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/a7f3d0/000000?text=Galpão+Logístico+Plus" alt="Galpão Logístico Plus" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Galpão Logístico Plus</h3>
+                                <p class="text-sm text-gray-500 mb-4">Campinas, SP</p>
+                                <p class="text-gray-700 text-sm">Estrutura moderna para otimizar a logística e armazenamento da sua empresa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DIFERENCIAIS -->
+        <section id="diferenciais" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">Nossos Diferenciais</h2>
+                    <p class="text-gray-700 mt-2">Pilares que sustentam a qualidade de cada obra.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Diferencial 1 -->
+                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
+                        <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Qualidade Superior</h3>
+                        <p class="text-gray-700 text-sm">Utilizamos os melhores materiais e técnicas construtivas para garantir durabilidade e acabamento impecável.</p>
+                    </div>
+                    <!-- Diferencial 2 -->
+                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
+                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Segurança em Primeiro Lugar</h3>
+                        <p class="text-gray-700 text-sm">Seguimos rigorosamente todas as normas de segurança para proteger nossos colaboradores e futuros moradores.</p>
+                    </div>
+                    <!-- Diferencial 3 -->
+                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
+                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Inovação e Tecnologia</h3>
+                        <p class="text-gray-700 text-sm">Buscamos constantemente por soluções inovadoras que agregam valor, conforto e sustentabilidade aos projetos.</p>
+                    </div>
+                    <!-- Diferencial 4 -->
+                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
+                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M22 12c0-5.52-4.48-10-10-10"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Compromisso com Prazos</h3>
+                        <p class="text-gray-700 text-sm">Planejamento e gestão eficientes que garantem a entrega dos empreendimentos dentro do prazo combinado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CONTATO -->
+        <section id="contato" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">Entre em Contato</h2>
+                    <p class="text-gray-700 mt-2">Estamos prontos para ouvir você. Envie sua mensagem!</p>
+                </div>
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl max-w-4xl mx-auto">
+                    <form action="#" method="POST">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Seu nome completo" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="seu.email@exemplo.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                             <label for="subject" class="block text-gray-700 font-medium mb-2">Assunto</label>
+                             <input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Ex: Informações sobre o Residencial Vista Alegre">
+                        </div>
+                         <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Digite sua mensagem aqui..." required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-colors">Enviar Mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <a href="#">
+                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNz7dDYKuC5jH5PJSUP4pvB31MC7JzRRz8w9k4Q37uMp4EQ9uzGubYa4OhHpfwpI0R-XIzhNYBVIwI0pSR0xpmVWAQ0EWcJ2Y9VVSu7oylzCdHHia9ueDT3Cf6nw3bxvjIqO-PuRot036FH7pOeN68=w400-h400-s-no-gm?authuser=1" alt="Logo da Construtora" class="h-12 w-auto mb-4">
+                    </a>
+                    <p class="text-gray-400 text-sm">Construindo mais que edifícios, criando lares e espaços para a vida acontecer.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#sobre" class="text-gray-400 hover:text-white">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#empreendimentos" class="text-gray-400 hover:text-white">Empreendimentos</a></li>
+                        <li class="mb-2"><a href="#contato" class="text-gray-400 hover:text-white">Contato</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                     <h4 class="text-lg font-semibold mb-4">Siga-nos</h4>
+                     <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                     </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Sua Construtora. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // LÓGICA DO JAVASCRIPT
+
+        // Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fechar menu mobile ao clicar em um link
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+
+        // Filtro de Projetos
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+        const projectGallery = document.getElementById('project-gallery');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Gerencia o estilo do botão ativo
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-green-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-gray-700');
+                });
+                button.classList.add('active', 'bg-green-600', 'text-white');
+                button.classList.remove('bg-white', 'text-gray-700');
+
+                const filter = button.getAttribute('data-filter');
+
+                // Animação de saída
+                projectItems.forEach(item => {
+                    item.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                });
+
+                // Atraso para permitir a animação de saída antes de filtrar
+                setTimeout(() => {
+                    projectItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                     // Animação de entrada
+                    let delay = 0;
+                    projectItems.forEach(item => {
+                        if (item.style.display === 'block') {
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, delay);
+                            delay += 100;
+                        }
+                    });
+                }, 300);
+            });
+        });
+        
+        // Efeito de scroll no header
+        const header = document.getElementById('header');
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scroll para baixo
+                header.style.top = '-100px';
+            } else {
+                // Scroll para cima
+                header.style.top = '0';
+            }
+            if (scrollTop > 50) {
+                 header.classList.add('py-2');
+                 header.classList.remove('py-4');
+            } else {
+                 header.classList.add('py-4');
+                 header.classList.remove('py-2');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+    </script>
+</body>
+</html>
