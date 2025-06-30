@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Construtora - Construindo o Futuro</title>
+    <title>Enipro - Construindo com Qualidade</title>
     
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,6 +39,22 @@
             background-size: cover;
             background-position: center;
         }
+        /* Estilos para os modais */
+        .modal.hidden {
+            display: none;
+        }
+        /* Estilo para a lista de projetos no modal completo */
+        .project-list-item.active {
+            background-color: #d1fae5; /* green-100 */
+            color: #047857; /* green-700 */
+            font-weight: 600;
+        }
+        /* Estilo para o botão de filtro ativo na página principal */
+        #project-filters .filter-btn.active {
+            color: #f97316; /* orange-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #f97316;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -73,8 +89,8 @@
         <section id="inicio" class="hero-section h-screen flex items-center justify-center text-white relative">
             <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="container mx-auto px-6 text-center z-10">
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-fade-in-down">Construindo Sonhos, Realizando Futuros</h1>
-                <p class="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in-up">Projetos que inspiram confiança e transformam o horizonte da cidade.</p>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-fade-in-down">Construindo com Qualidade</h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in-up">Engenharia que constrói valor para o seu futuro.</p>
                 <a href="#empreendimentos" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105">Conheça Nossos Projetos</a>
             </div>
         </section>
@@ -89,10 +105,12 @@
                     <div>
                         <h2 class="text-3xl font-bold text-gray-900 mb-4">Mais de 20 Anos de Excelência</h2>
                         <p class="text-gray-700 mb-4 leading-relaxed">
-                            Desde 2003, nossa construtora tem sido sinônimo de qualidade e inovação. Com uma trajetória marcada por projetos bem-sucedidos, combinamos tradição e tecnologia para entregar empreendimentos que superam as expectativas.
+                            Desde 1998, a ENIPRO ENGENHARIA se dedica a desenvolver soluções completas para a construção civil, guiada por um compromisso inabalável com a excelência e a satisfação de nossos clientes.
+                            Nossa missão é realizar seus projetos e construir seus sonhos com a segurança e a confiabilidade que apenas uma equipe de especialistas pode oferecer. Da fundação aos acabamentos, integramos técnica, prática e inovação para garantir o melhor resultado.
+                            Atendemos empresas de todos os portes nos segmentos comercial, industrial e de empreendimentos imobiliários. A fidelidade de nossos parceiros e clientes é o nosso maior portfólio e a prova viva do nosso padrão de entrega.
                         </p>
                         <p class="text-gray-700 mb-6 leading-relaxed">
-                            Nossa missão é criar espaços que promovam qualidade de vida, segurança e valorização, sempre com um profundo respeito pelo meio ambiente e pela comunidade.
+                            ENIPRO Engenharia. Construindo com qualidade.
                         </p>
                         <div class="flex space-x-6">
                             <div class="text-center">
@@ -117,84 +135,24 @@
                     <p class="text-gray-700 mt-2">Conheça os projetos que definem nosso padrão de qualidade.</p>
                 </div>
                 
-                <!-- Filtros -->
-                <div id="project-filters" class="flex justify-center space-x-2 md:space-x-4 mb-10">
-                    <button class="filter-btn active bg-green-600 text-white px-4 py-2 rounded-full" data-filter="all">Todos</button>
-                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="residencial">Residencial</button>
-                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="comercial">Comercial</button>
-                    <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full hover:bg-green-100" data-filter="industrial">Industrial</button>
+                <div id="project-filters" class="flex justify-center space-x-4 md:space-x-8 mb-10">
+                    <button class="filter-btn active px-4 py-2 rounded-md" data-filter="residencial">Residencial</button>
+                    <button class="filter-btn text-gray-500 px-4 py-2 rounded-md" data-filter="comercial">Comercial</button>
+                    <button class="filter-btn text-gray-500 px-4 py-2 rounded-md" data-filter="industrial">Industrial</button>
                 </div>
 
                 <div id="project-gallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projeto 1 -->
-                    <div class="project-item residencial" data-category="residencial">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                            <div class="relative">
-                                <img src="https://placehold.co/600x400/34d399/ffffff?text=Residencial+Vista+Alegre" alt="Residencial Vista Alegre" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Residencial Vista Alegre</h3>
-                                <p class="text-sm text-gray-500 mb-4">São Paulo, SP</p>
-                                <p class="text-gray-700 text-sm">Apartamentos de alto padrão com vista panorâmica e lazer completo.</p>
-                            </div>
-                        </div>
-                    </div>
-                     <!-- Projeto 2 -->
-                     <div class="project-item comercial" data-category="comercial">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                            <div class="relative">
-                                <img src="https://placehold.co/600x400/6ee7b7/000000?text=Centro+Empresarial+Connect" alt="Centro Empresarial Connect" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Centro Empresarial Connect</h3>
-                                <p class="text-sm text-gray-500 mb-4">Rio de Janeiro, RJ</p>
-                                <p class="text-gray-700 text-sm">Salas comerciais modernas em localização estratégica para o seu negócio.</p>
-                            </div>
-                        </div>
-                    </div>
-                     <!-- Projeto 3 -->
-                     <div class="project-item residencial" data-category="residencial">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                            <div class="relative">
-                                <img src="https://placehold.co/600x400/10b981/ffffff?text=Condomínio+Vila+das+Flores" alt="Condomínio Vila das Flores" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Condomínio Vila das Flores</h3>
-                                <p class="text-sm text-gray-500 mb-4">Belo Horizonte, MG</p>
-                                <p class="text-gray-700 text-sm">Casas com design exclusivo, segurança e contato com a natureza.</p>
-                            </div>
-                        </div>
-                    </div>
-                     <!-- Projeto 4 -->
-                     <div class="project-item industrial" data-category="industrial">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                            <div class="relative">
-                                <img src="https://placehold.co/600x400/a7f3d0/000000?text=Galpão+Logístico+Plus" alt="Galpão Logístico Plus" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <p class="text-white text-lg font-bold">Ver Detalhes</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2 text-gray-900">Galpão Logístico Plus</h3>
-                                <p class="text-sm text-gray-500 mb-4">Campinas, SP</p>
-                                <p class="text-gray-700 text-sm">Estrutura moderna para otimizar a logística e armazenamento da sua empresa.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Os cards dos projetos serão inseridos aqui pelo JavaScript -->
+                </div>
+                <div class="text-center mt-12">
+                    <button id="open-all-projects-modal-btn" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105">
+                        Ver Todos os Projetos
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO DIFERENCIAIS -->
+        <!-- Demais seções (Diferenciais, Contato) -->
         <section id="diferenciais" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -202,7 +160,6 @@
                     <p class="text-gray-700 mt-2">Pilares que sustentam a qualidade de cada obra.</p>
                 </div>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Diferencial 1 -->
                     <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
@@ -210,7 +167,6 @@
                         <h3 class="text-xl font-semibold mb-2">Qualidade Superior</h3>
                         <p class="text-gray-700 text-sm">Utilizamos os melhores materiais e técnicas construtivas para garantir durabilidade e acabamento impecável.</p>
                     </div>
-                    <!-- Diferencial 2 -->
                     <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
                          <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -218,7 +174,6 @@
                         <h3 class="text-xl font-semibold mb-2">Segurança em Primeiro Lugar</h3>
                         <p class="text-gray-700 text-sm">Seguimos rigorosamente todas as normas de segurança para proteger nossos colaboradores e futuros moradores.</p>
                     </div>
-                    <!-- Diferencial 3 -->
                     <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
                          <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -226,7 +181,6 @@
                         <h3 class="text-xl font-semibold mb-2">Inovação e Tecnologia</h3>
                         <p class="text-gray-700 text-sm">Buscamos constantemente por soluções inovadoras que agregam valor, conforto e sustentabilidade aos projetos.</p>
                     </div>
-                    <!-- Diferencial 4 -->
                     <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl transition-shadow">
                          <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M22 12c0-5.52-4.48-10-10-10"></path></svg>
@@ -237,8 +191,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- SEÇÃO CONTATO -->
         <section id="contato" class="py-20 bg-gray-100">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12">
@@ -308,84 +260,339 @@
         </div>
     </footer>
 
+    <!-- MODAL SIMPLES (PARA OS CARDS DA PÁGINA INICIAL) -->
+    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row transform transition-transform duration-300 scale-95">
+            <button id="close-modal-btn" class="absolute -top-3 -right-3 text-white bg-gray-800 rounded-full h-8 w-8 flex items-center justify-center z-10 hover:bg-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="w-full md:w-3/5 p-2 md:p-4">
+                <div class="relative h-full">
+                    <img id="modal-image" src="" alt="Foto do empreendimento" class="w-full h-full rounded-lg object-cover">
+                </div>
+            </div>
+            <div class="w-full md:w-2/5 p-6 flex flex-col justify-center">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-900 mb-2"></h3>
+                <p id="modal-location" class="text-md text-gray-500 mb-4"></p>
+                <p id="modal-description" class="text-gray-700 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE TODOS OS PROJETOS (GALERIA COMPLETA) -->
+    <div id="all-projects-modal" class="modal fixed inset-0 bg-black bg-opacity-80 z-[110] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-6xl h-[90vh] flex flex-row transform transition-transform duration-300 scale-95">
+             <!-- Botão de Fechar -->
+            <button id="close-all-projects-modal-btn" class="absolute -top-3 -right-3 text-white bg-gray-800 rounded-full h-8 w-8 flex items-center justify-center z-20 hover:bg-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <!-- Coluna da Esquerda: Lista de Projetos -->
+            <div class="w-1/3 flex flex-col border-r border-gray-200">
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-800">Portfólio de Obras</h3>
+                    <div id="all-projects-filters" class="flex space-x-2 mt-3">
+                         <button class="all-projects-filter-btn flex-1 bg-green-600 text-white px-3 py-1 text-sm rounded-md" data-status-filter="all">Todos</button>
+                         <button class="all-projects-filter-btn flex-1 bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-md" data-status-filter="finalizada">Finalizadas</button>
+                         <button class="all-projects-filter-btn flex-1 bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-md" data-status-filter="projeto">Em Andamento</button>
+                    </div>
+                </div>
+                <div id="all-projects-list" class="flex-1 overflow-y-auto p-2">
+                    <!-- Lista será populada pelo JS -->
+                </div>
+            </div>
+
+            <!-- Coluna da Direita: Detalhes do Projeto -->
+            <div id="all-projects-details" class="w-2/3 flex flex-col p-4 md:p-6">
+                <!-- Imagem Principal e Navegação -->
+                <div class="relative w-full h-3/5 mb-4">
+                    <img id="all-projects-image" src="https://placehold.co/800x600/e2e8f0/2d3748?text=Selecione+um+projeto" alt="Foto do empreendimento selecionado" class="w-full h-full rounded-lg object-cover">
+                    <button id="all-projects-prev-btn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <button id="all-projects-next-btn" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition-colors">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+                <!-- Descrição Fixa -->
+                <div class="h-2/5 overflow-y-auto">
+                    <h3 id="all-projects-title" class="text-2xl font-bold text-gray-900 mb-1"></h3>
+                    <p id="all-projects-location" class="text-md text-gray-500 mb-3"></p>
+                    <p id="all-projects-description" class="text-gray-700 leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
-        // LÓGICA DO JAVASCRIPT
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // --- BANCO DE DADOS DOS PROJETOS ---
+        const allProjects = [
+            { id: 0, title: 'Laponia', location: 'Itu, SP', category: 'industrial', status: 'finalizada', description: 'Projeto industrial de grande porte com soluções inovadoras em logística e produção. A obra foi concluída com foco em sustentabilidade e eficiência energética.', images: ['https://photos.fife.usercontent.google.com/pw/AP1GczNjPXTIql6sLoPpnWBNFDONuOMPhxzkhOMcbcBrOg6_w-veBukDIZc=w1359-h913-s-no-gm?authuser=1', 'https://lh3.googleusercontent.com/pw/AP1GczPGrCj360amtISdNhpazCh8OYak6XBHhD-EvP5yeUR98LDftPZ-9zG4qBfxmmS_r_tn_7PDPiNwU1iJaDpagc49FWxtFwh4IrK-FYlaW3gGXvE_x-U2pMdy4POdxELffGxX_Ll5mx2g2fe6IK3_coY=w886-h661-s-no-gm?authuser=1'] },
+            { id: 1, title: 'Symrise', location: 'Sorocaba, SP', category: 'industrial', status: 'finalizada', description: 'Edificação corporativa com design moderno e sustentável. O projeto incluiu laboratórios de alta tecnologia e áreas de convivência para colaboradores.', images: ['https://lh3.googleusercontent.com/pw/AP1GczPGrCj360amtISdNhpazCh8OYak6XBHhD-EvP5yeUR98LDftPZ-9zG4qBfxmmS_r_tn_7PDPiNwU1iJaDpagc49FWxtFwh4IrK-FYlaW3gGXvE_x-U2pMdy4POdxELffGxX_Ll5mx2g2fe6IK3_coY=w886-h661-s-no-gm?authuser=1', 'https://photos.fife.usercontent.google.com/pw/AP1GczNjPXTIql6sLoPpnWBNFDONuOMPhxzkhOMcbcBrOg6_w-veBukDIZc=w1359-h913-s-no-gm?authuser=1'] },
+            { id: 2, title: 'Residencial Sol Nascente', location: 'Campinas, SP', category: 'residencial', status: 'projeto', description: 'Condomínio de apartamentos em fase de projeto. Foco em áreas de lazer completas e integração com a natureza.', images: ['https://placehold.co/800x600/f97316/ffffff?text=Sol+Nascente+1', 'https://placehold.co/800x600/f97316/ffffff?text=Sol+Nascente+2'] },
+            { id: 3, title: 'Centro Comercial Plaza', location: 'Jundiaí, SP', category: 'comercial', status: 'finalizada', description: 'Complexo de lojas e escritórios entregue com sucesso, tornando-se um novo ponto de referência na cidade.', images: ['https://placehold.co/800x600/3b82f6/ffffff?text=Plaza+1', 'https://placehold.co/800x600/3b82f6/ffffff?text=Plaza+2'] },
+            { id: 4, title: 'Parque Industrial Inova', location: 'Sumaré, SP', category: 'industrial', status: 'projeto', description: 'Projeto de um parque industrial focado em empresas de tecnologia. Infraestrutura de ponta em andamento.', images: ['https://placehold.co/800x600/84cc16/ffffff?text=Inova+1', 'https://placehold.co/800x600/84cc16/ffffff?text=Inova+2'] },
+            { id: 5, title: 'Edifício Corporativo Delta', location: 'São Paulo, SP', category: 'comercial', status: 'finalizada', description: 'Torre corporativa de alto padrão na capital paulista, com certificação de sustentabilidade LEED Gold.', images: ['https://placehold.co/800x600/6366f1/ffffff?text=Delta+1', 'https://placehold.co/800x600/6366f1/ffffff?text=Delta+2'] },
+            { id: 6, title: 'Condomínio Bosque Real', location: 'Valinhos, SP', category: 'residencial', status: 'finalizada', description: 'Condomínio de casas de alto padrão entregue, com ênfase em segurança e áreas verdes preservadas.', images: ['https://placehold.co/800x600/10b981/ffffff?text=Bosque+Real+1', 'https://placehold.co/800x600/10b981/ffffff?text=Bosque+Real+2'] },
+            { id: 7, title: 'Galpão Logístico Express', location: 'Itupeva, SP', category: 'industrial', status: 'finalizada', description: 'Centro de distribuição estratégico com docas e pátio de manobra otimizados para grandes operações.', images: ['https://placehold.co/800x600/a7f3d0/000000?text=Express+1', 'https://placehold.co/800x600/a7f3d0/000000?text=Express+2'] },
+            { id: 8, title: 'Torre Médica Vitalis', location: 'Sorocaba, SP', category: 'comercial', status: 'projeto', description: 'Futuro centro médico que abrigará consultórios e clínicas, com projeto arquitetônico focado no bem-estar.', images: ['https://placehold.co/800x600/ec4899/ffffff?text=Vitalis+1', 'https://placehold.co/800x600/ec4899/ffffff?text=Vitalis+2'] },
+            { id: 9, title: 'Residencial Vista do Vale', location: 'Vinhedo, SP', category: 'residencial', status: 'projeto', description: 'Lançamento de apartamentos com vista privilegiada e conceito de clube residencial. Obras em andamento.', images: ['https://placehold.co/800x600/f59e0b/ffffff?text=Vista+do+Vale+1', 'https://placehold.co/800x600/f59e0b/ffffff?text=Vista+do+Vale+2'] },
+        ];
 
-        // Menu Mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Fechar menu mobile ao clicar em um link
-        mobileMenu.addEventListener('click', (event) => {
-            if (event.target.tagName === 'A') {
-                mobileMenu.classList.add('hidden');
-            }
-        });
-
-
-        // Filtro de Projetos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectItems = document.querySelectorAll('.project-item');
+        // --- RENDERIZAÇÃO INICIAL E FILTROS DA PÁGINA PRINCIPAL ---
         const projectGallery = document.getElementById('project-gallery');
+        const filterButtons = document.querySelectorAll('#project-filters .filter-btn');
 
+        function createProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = `project-item ${project.category}`;
+            card.setAttribute('data-category', project.category);
+            card.innerHTML = `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group h-full flex flex-col">
+                    <div class="relative">
+                        <img src="${project.images[0]}" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/e2e8f0/2d3748?text=Imagem+Indisponível';" 
+                             alt="${project.title}" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button class="open-modal-btn text-white text-lg font-bold cursor-pointer bg-transparent border-none" data-project-id="${project.id}">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900">${project.title}</h3>
+                        <p class="text-sm text-gray-500 mb-4">${project.location}</p>
+                        <p class="text-gray-700 text-sm flex-grow">${project.description.substring(0, 80)}...</p>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function renderMainGallery(filter = 'residencial') { // Default to 'residencial'
+            projectGallery.innerHTML = '';
+            const filteredProjects = allProjects
+                .filter(p => p.category === filter)
+                .slice(0, 3); // EXIBE APENAS 3
+
+            filteredProjects.forEach(project => {
+                projectGallery.appendChild(createProjectCard(project));
+            });
+            addEventListenersToModalButtons();
+        }
+        
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Gerencia o estilo do botão ativo
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('active', 'bg-green-600', 'text-white');
-                    btn.classList.add('bg-white', 'text-gray-700');
-                });
-                button.classList.add('active', 'bg-green-600', 'text-white');
-                button.classList.remove('bg-white', 'text-gray-700');
-
+                // Reset all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Activate clicked button
+                button.classList.add('active');
+                
                 const filter = button.getAttribute('data-filter');
-
-                // Animação de saída
-                projectItems.forEach(item => {
-                    item.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.95)';
-                });
-
-                // Atraso para permitir a animação de saída antes de filtrar
-                setTimeout(() => {
-                    projectItems.forEach(item => {
-                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                     // Animação de entrada
-                    let delay = 0;
-                    projectItems.forEach(item => {
-                        if (item.style.display === 'block') {
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'scale(1)';
-                            }, delay);
-                            delay += 100;
-                        }
-                    });
-                }, 300);
+                renderMainGallery(filter);
             });
         });
         
-        // Efeito de scroll no header
+        // --- LÓGICA DO MODAL SIMPLES ---
+        const projectModal = document.getElementById('project-modal');
+        const modalContent = projectModal.querySelector('.transform');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalLocation = document.getElementById('modal-location');
+        const modalDescription = document.getElementById('modal-description');
+
+        function openSimpleModal(projectId) {
+            const project = allProjects.find(p => p.id == projectId);
+            if (!project) return;
+            
+            modalImage.src = project.images[0];
+            modalTitle.textContent = project.title;
+            modalLocation.textContent = project.location;
+            modalDescription.textContent = project.description;
+            
+            projectModal.classList.remove('hidden');
+            setTimeout(() => {
+                projectModal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSimpleModal() {
+            projectModal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        closeModalBtn.addEventListener('click', closeSimpleModal);
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) closeSimpleModal();
+        });
+
+        function addEventListenersToModalButtons() {
+            document.querySelectorAll('.open-modal-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    openSimpleModal(e.target.dataset.projectId);
+                });
+            });
+        }
+
+
+        // --- LÓGICA DO MODAL DE GALERIA COMPLETA ---
+        const allProjectsModal = document.getElementById('all-projects-modal');
+        const allProjectsModalContent = allProjectsModal.querySelector('.transform');
+        const openAllProjectsBtn = document.getElementById('open-all-projects-modal-btn');
+        const closeAllProjectsBtn = document.getElementById('close-all-projects-modal-btn');
+        const allProjectsListContainer = document.getElementById('all-projects-list');
+        const allProjectsFilterBtns = document.querySelectorAll('.all-projects-filter-btn');
+
+        // Elementos de detalhes
+        const detailsImage = document.getElementById('all-projects-image');
+        const detailsTitle = document.getElementById('all-projects-title');
+        const detailsLocation = document.getElementById('all-projects-location');
+        const detailsDescription = document.getElementById('all-projects-description');
+        const detailsPrevBtn = document.getElementById('all-projects-prev-btn');
+        const detailsNextBtn = document.getElementById('all-projects-next-btn');
+
+        let currentGalleryProject = null;
+        let currentGalleryImageIndex = 0;
+
+        function renderAllProjectsList(statusFilter = 'all') {
+            allProjectsListContainer.innerHTML = '';
+            const filtered = allProjects.filter(p => statusFilter === 'all' || p.status === statusFilter);
+            
+            filtered.forEach(project => {
+                const listItem = document.createElement('div');
+                listItem.className = 'project-list-item p-3 cursor-pointer hover:bg-gray-100 rounded-md transition-colors';
+                listItem.textContent = project.title;
+                listItem.dataset.projectId = project.id;
+                allProjectsListContainer.appendChild(listItem);
+            });
+            
+            // Adicionar listeners aos novos itens
+            allProjectsListContainer.querySelectorAll('.project-list-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const projectId = item.dataset.projectId;
+                    displayProjectDetails(projectId);
+                    // Marcar item como ativo
+                    allProjectsListContainer.querySelectorAll('.project-list-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+
+            // Exibir o primeiro projeto da lista filtrada
+            if (filtered.length > 0) {
+                 displayProjectDetails(filtered[0].id);
+                 allProjectsListContainer.querySelector('.project-list-item').classList.add('active');
+            } else {
+                 // Limpar detalhes se não houver projetos
+                 detailsImage.src = 'https://placehold.co/800x600/e2e8f0/2d3748?text=Nenhum+projeto';
+                 detailsTitle.textContent = 'Nenhum projeto encontrado';
+                 detailsLocation.textContent = '';
+                 detailsDescription.textContent = '';
+                 currentGalleryProject = null;
+            }
+        }
+
+        function displayProjectDetails(projectId) {
+            const project = allProjects.find(p => p.id == projectId);
+            if (!project) return;
+            
+            currentGalleryProject = project;
+            currentGalleryImageIndex = 0;
+
+            detailsTitle.textContent = project.title;
+            detailsLocation.textContent = project.location;
+            detailsDescription.textContent = project.description;
+            updateGalleryImage();
+        }
+
+        function updateGalleryImage() {
+            if (!currentGalleryProject) return;
+            detailsImage.src = currentGalleryProject.images[currentGalleryImageIndex];
+        }
+        
+        detailsPrevBtn.addEventListener('click', () => {
+            if (!currentGalleryProject) return;
+            currentGalleryImageIndex = (currentGalleryImageIndex - 1 + currentGalleryProject.images.length) % currentGalleryProject.images.length;
+            updateGalleryImage();
+        });
+
+        detailsNextBtn.addEventListener('click', () => {
+            if (!currentGalleryProject) return;
+            currentGalleryImageIndex = (currentGalleryImageIndex + 1) % currentGalleryProject.images.length;
+            updateGalleryImage();
+        });
+        
+        allProjectsFilterBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                allProjectsFilterBtns.forEach(btn => {
+                    btn.classList.remove('bg-green-600', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                button.classList.add('bg-green-600', 'text-white');
+                button.classList.remove('bg-gray-200', 'text-gray-700');
+                renderAllProjectsList(button.dataset.statusFilter);
+            });
+        });
+
+        function openAllProjectsModal() {
+            renderAllProjectsList(); // Renderiza com o filtro "Todos"
+            allProjectsModal.classList.remove('hidden');
+            setTimeout(() => {
+                allProjectsModal.classList.remove('opacity-0');
+                allProjectsModalContent.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAllProjectsModal() {
+            allProjectsModal.classList.add('opacity-0');
+            allProjectsModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                allProjectsModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        openAllProjectsBtn.addEventListener('click', openAllProjectsModal);
+        closeAllProjectsBtn.addEventListener('click', closeAllProjectsModal);
+        allProjectsModal.addEventListener('click', (e) => {
+            if (e.target === allProjectsModal) closeAllProjectsModal();
+        });
+
+        // --- INICIALIZAÇÃO ---
+        renderMainGallery(); // Renderiza a galeria principal na carga da página
+
+        // Lidar com Esc para fechar qualquer modal aberto
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (!projectModal.classList.contains('hidden')) closeSimpleModal();
+                if (!allProjectsModal.classList.contains('hidden')) closeAllProjectsModal();
+            }
+        });
+
+        // Menu Mobile (código original)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') mobileMenu.classList.add('hidden');
+        });
+
+        // Efeito de scroll no header (código original)
         const header = document.getElementById('header');
         let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                // Scroll para baixo
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
                 header.style.top = '-100px';
             } else {
-                // Scroll para cima
                 header.style.top = '0';
             }
             if (scrollTop > 50) {
@@ -397,7 +604,7 @@
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, false);
-
+    });
     </script>
 </body>
 </html>
