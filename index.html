@@ -39,7 +39,7 @@
             width: 100%;
         }
         .hero-section {
-            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczPb7Hzz9Cf1UNSNvnKkjZ9rRx-R42EyP_1jrXB8YlD5MB9_UCKGCLkiOCM-l8E6zmRgJBBfToeiNYCwT4Kz8lZYoG5WRiYDuXVWMIGS4-DEpMgL3jLAmIPz-vuZtS7jILijaBpJLsc8CNKFKafFxpE=w1369-h913-s-no-gm?authuser=1');
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNiMxYRK9nuc8B9fNMR4_gRjdeTNhGFT9Q0CN0jIv1IodyBZLBNEvt08UDmUEZal10Rk7d0MDPuxgb3TuFfGeelEIu6Jpzr4zC4_cz4LzfDqESFF66Ng4pdKep6PqrH5E8nGvJ_5hi0GhIO2rG4LzA=w1536-h758-s-no-gm?authuser=1');
             background-size: cover;
             background-position: center;
         }
@@ -75,6 +75,34 @@
             transform: scale(0.95);
             opacity: 0;
         }
+        /* Estilos para a timeline de scroll */
+        #scroll-timeline {
+            transition: opacity 0.5s ease-in-out;
+        }
+        #scroll-timeline.visible {
+            opacity: 0.6; /* Opacidade reduzida para ser menos proeminente */
+        }
+        #scroll-timeline.visible:hover {
+            opacity: 1; /* Opacidade total ao passar o mouse */
+        }
+        #scroll-timeline.visible .timeline-label {
+            opacity: 1;
+        }
+        .timeline-dot {
+            transition: all 0.3s ease;
+        }
+        .timeline-label {
+            transition: all 0.3s ease-in-out;
+            color: #4b5563; /* gray-600 */
+        }
+        li.active .timeline-dot {
+            background-color: #16a34a; /* green-600 */
+            transform: scale(1.5);
+        }
+        li.active .timeline-label {
+            color: #111827; /* gray-900 */
+            font-weight: 600;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -93,7 +121,7 @@
                 <a href="#inicio" class="nav-link text-gray-600 hover:text-green-600 font-medium">Início</a>
                 <a href="#sobre" class="nav-link text-gray-600 hover:text-green-600 font-medium">Sobre Nós</a>
                 <a href="#empreendimentos" class="nav-link text-gray-600 hover:text-green-600 font-medium">Empreendimentos</a>
-                <a href="#contato" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors">Contato</a>
+                <a href="#contato" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors">Solicite um Orçamento</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
@@ -104,13 +132,13 @@
             <a href="#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Início</a>
             <a href="#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Sobre Nós</a>
             <a href="#empreendimentos" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Empreendimentos</a>
-            <a href="#contato" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Contato</a>
+            <a href="#contato" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Solicite um Orçamento</a>
         </div>
     </header>
 
     <main>
         <!-- SEÇÃO HERO -->
-        <section id="inicio" class="hero-section h-screen relative">
+        <section id="inicio" class="hero-section h-[80vh] relative">
             <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 animate__animated animate__fadeInDown">Construindo com Qualidade</h1>
@@ -120,23 +148,18 @@
         </section>
 
         <!-- SEÇÃO SOBRE NÓS -->
-        <section id="sobre" class="py-16 sm:py-20 bg-white overflow-hidden">
+        <section id="sobre" class="py-16 sm:py-20 bg-white overflow-hidden -mt-20 relative z-10 rounded-t-2xl">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div class="animate-on-scroll" data-animation="animate__fadeInLeft">
-                        <img src="https://placehold.co/600x400/e2e8f0/2d3748?text=Nossa+Equipe" alt="Equipe da construtora" class="rounded-lg shadow-2xl w-full">
+                        <img src="https://placehold.co/600x400/e2e8f0/2d3748?text=Nossa+Equipe" alt="Equipe da construtora" class="rounded-lg shadow-2xl w-5/6 mx-auto">
                     </div>
                     <div class="animate-on-scroll" data-animation="animate__fadeInRight">
-                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Mais de 20 Anos de Excelência</h2>
-                        <p class="text-gray-700 mb-4 leading-relaxed">
-                            Desde 1998, a ENIPRO ENGENHARIA se dedica a desenvolver soluções completas para a construção civil, guiada por um compromisso inabalável com a excelência e a satisfação de nossos clientes.
-                            Nossa missão é realizar seus projetos e construir seus sonhos com a segurança e a confiabilidade que apenas uma equipe de especialistas pode oferecer. Da fundação aos acabamentos, integramos técnica, prática e inovação para garantir o melhor resultado.
-                            Atendemos empresas de todos os portes nos segmentos comercial, industrial e de empreendimentos imobiliários. A fidelidade de nossos parceiros e clientes é o nosso maior portfólio e a prova viva do nosso padrão de entrega.
-                        </p>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Soluções Completas em Engenharia</h2>
                         <p class="text-gray-700 mb-6 leading-relaxed">
-                            ENIPRO Engenharia. Construindo com qualidade.
+                           A ENIPRO ENGENHARIA, desde 1998, oferece soluções completas e inovadoras para a construção civil. Atendemos projetos comerciais, industriais e imobiliários com um compromisso de excelência, segurança e confiabilidade em todas as etapas da obra.
                         </p>
-                        <div class="flex justify-center md:justify-start space-x-6">
+                        <div class="flex justify-center md:justify-start space-x-6 mb-6">
                             <div class="text-center">
                                 <p class="text-2xl sm:text-3xl font-bold text-green-600">+50</p>
                                 <p class="text-gray-500 text-sm sm:text-base">Projetos Entregues</p>
@@ -146,6 +169,7 @@
                                 <p class="text-gray-500 text-sm sm:text-base">Clientes Satisfeitos</p>
                             </div>
                         </div>
+                        <button id="open-history-modal-btn" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105 mt-4">Conheça toda nossa história</button>
                     </div>
                 </div>
             </div>
@@ -289,6 +313,32 @@
         </section>
     </main>
 
+    <!-- TIMELINE DE SCROLL -->
+    <nav id="scroll-timeline" class="fixed right-5 top-1/2 -translate-y-1/2 z-40 opacity-0">
+        <ul class="flex flex-col space-y-2 items-end">
+            <li class="flex items-center">
+                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Início</span>
+                <a href="#inicio" title="Início" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="inicio"></a>
+            </li>
+            <li class="flex items-center">
+                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Sobre Nós</span>
+                <a href="#sobre" title="Sobre Nós" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="sobre"></a>
+            </li>
+            <li class="flex items-center">
+                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Empreendimentos</span>
+                <a href="#empreendimentos" title="Empreendimentos" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="empreendimentos"></a>
+            </li>
+            <li class="flex items-center">
+                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Diferenciais</span>
+                <a href="#diferenciais" title="Diferenciais" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="diferenciais"></a>
+            </li>
+            <li class="flex items-center">
+                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Contato</span>
+                <a href="#contato" title="Contato" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="contato"></a>
+            </li>
+        </ul>
+    </nav>
+
     <!-- RODAPÉ -->
     <footer class="bg-gray-800 text-white">
         <div class="container mx-auto px-4 sm:px-6 py-12">
@@ -322,6 +372,24 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL DE HISTÓRIA -->
+    <div id="history-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col transform transition-transform duration-300 scale-95">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-bold text-gray-900">Nossa História</h3>
+                <button id="close-history-modal-btn" class="text-gray-500 hover:text-red-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <p class="text-gray-700 leading-relaxed mb-4">Especializada no desenvolvimento de soluções completas para a construção civil, a ENIPRO ENGENHARIA transforma projetos em realidade. Nosso compromisso primordial é com a satisfação de nossos clientes e a excelência de nossa equipe, unindo técnica e inovação para construir o futuro.</p>
+                <p class="text-gray-700 leading-relaxed mb-4">Desde 1998, sob a direção de especialistas com vasta experiência no mercado, construímos uma trajetória de sucesso e credibilidade. Contamos com um time de profissionais altamente qualificados e em constante treinamento, garantindo a segurança, a confiabilidade e a qualidade superior que cada obra exige.</p>
+                <p class="text-gray-700 leading-relaxed mb-4">Com mais de 25 anos de experiência, dominamos todas as etapas do processo construtivo, desde a concepção e especificação do projeto até os ajustes finais. Atendemos com a mesma dedicação e competência empresas de pequeno, médio e grande porte nos setores comercial, industrial e de empreendimentos imobiliários.</p>
+                <p class="text-gray-700 leading-relaxed">Nosso maior orgulho é o portfólio que construímos e, principalmente, a fidelidade de nossos clientes e parceiros, que nos credenciam como uma empresa respeitada e frequentemente recomendada. Isso é resultado de uma equipe engajada, que encontra na ENIPRO um ambiente de respeito, capacitação e motivação para entregar sempre o melhor.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL SIMPLES (PARA OS CARDS DA PÁGINA INICIAL) -->
     <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
@@ -460,14 +528,17 @@
             });
         });
         
-        // --- LÓGICA DO MODAL SIMPLES ---
+        // --- LÓGICA DOS MODAIS ---
         const projectModal = document.getElementById('project-modal');
-        const modalContent = projectModal.querySelector('.transform');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const modalImage = document.getElementById('modal-image');
         const modalTitle = document.getElementById('modal-title');
         const modalLocation = document.getElementById('modal-location');
         const modalDescription = document.getElementById('modal-description');
+        
+        const historyModal = document.getElementById('history-modal');
+        const openHistoryModalBtn = document.getElementById('open-history-modal-btn');
+        const closeHistoryModalBtn = document.getElementById('close-history-modal-btn');
 
         function openSimpleModal(projectId) {
             const project = allProjects.find(p => p.id == projectId);
@@ -481,16 +552,34 @@
             projectModal.classList.remove('hidden');
             setTimeout(() => {
                 projectModal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
+                projectModal.querySelector('.transform').classList.remove('scale-95');
             }, 10);
             document.body.style.overflow = 'hidden';
         }
 
         function closeSimpleModal() {
             projectModal.classList.add('opacity-0');
-            modalContent.classList.add('scale-95');
+            projectModal.querySelector('.transform').classList.add('scale-95');
             setTimeout(() => {
                 projectModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function openHistoryModal() {
+            historyModal.classList.remove('hidden');
+            setTimeout(() => {
+                historyModal.classList.remove('opacity-0');
+                historyModal.querySelector('.transform').classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeHistoryModal() {
+            historyModal.classList.add('opacity-0');
+            historyModal.querySelector('.transform').classList.add('scale-95');
+            setTimeout(() => {
+                historyModal.classList.add('hidden');
                 document.body.style.overflow = '';
             }, 300);
         }
@@ -498,6 +587,12 @@
         closeModalBtn.addEventListener('click', closeSimpleModal);
         projectModal.addEventListener('click', (e) => {
             if (e.target === projectModal) closeSimpleModal();
+        });
+        
+        openHistoryModalBtn.addEventListener('click', openHistoryModal);
+        closeHistoryModalBtn.addEventListener('click', closeHistoryModal);
+        historyModal.addEventListener('click', (e) => {
+            if (e.target === historyModal) closeHistoryModal();
         });
 
         function addEventListenersToModalButtons() {
@@ -651,6 +746,7 @@
             if (e.key === 'Escape') {
                 if (!projectModal.classList.contains('hidden')) closeSimpleModal();
                 if (!allProjectsModal.classList.contains('hidden')) closeAllProjectsModal();
+                if (!historyModal.classList.contains('hidden')) closeHistoryModal();
             }
         });
 
@@ -680,7 +776,44 @@
                  header.classList.remove('py-2');
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, false);
+        });
+
+        // --- LÓGICA DA TIMELINE DE SCROLL ---
+        const timeline = document.getElementById('scroll-timeline');
+        const timelineItems = document.querySelectorAll('#scroll-timeline li');
+        const sections = document.querySelectorAll('main section[id]');
+        let scrollTimeout;
+
+        function handleScroll() {
+            // Mostra a timeline
+            timeline.classList.add('visible');
+
+            // Limpa o timeout anterior e define um novo para esconder a timeline
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                timeline.classList.remove('visible');
+            }, 1500); // Esconde após 1.5s de inatividade
+
+            // Atualiza o dot ativo
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                // Considera a seção ativa quando seu topo passa da metade da tela
+                if (sectionTop < window.innerHeight / 2) {
+                    currentSectionId = section.id;
+                }
+            });
+
+            timelineItems.forEach(item => {
+                const dot = item.querySelector('.timeline-dot');
+                item.classList.remove('active');
+                if (dot && dot.getAttribute('data-section') === currentSectionId) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
     });
     </script>
 </body>
