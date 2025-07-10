@@ -1,311 +1,511 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enipro - Construindo com Qualidade</title>
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/pw/AP1GczNz7dDYKuC5jH5PJSUP4pvB31MC7JzRRz8w9k4Q37uMp4EQ9uzGubYa4OhHpfwpI0R-XIzhNYBVIwI0pSR0xpmVWAQ0EWcJ2Y9VVSu7oylzCdHHia9ueDT3Cf6nw3bxvjIqO-PuRot036FH7pOeN68=w400-h400-s-no-gm?authuser=1">
-    
-    <!-- Tailwind CSS via CDN -->
+    <title>Marcenaria Artesanal - Design e Matéria</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Poppins -->
+
+    <!-- GSAP para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Fontes do Google: Montserrat para títulos, Lato para corpo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Animate.css para Animações -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <!-- Ícones: Lucide.dev -->
-    <script src="https://unpkg.com/lucide-react@0.292.0/dist/lucide-react.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilo customizado para usar a fonte Poppins */
+        :root {
+            --bg-color: #141414;
+            --text-color: #e5e5e5;
+            --primary-color: #2e2520;
+            --accent-color: #c5a57e; /* Dourado/Cobre sutil */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
         }
-        /* Efeito de sublinhado animado para os links do menu */
-        .nav-link::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: #16a34a; /* Verde primário (green-600) */
-            transition: width .3s;
+
+        .font-title {
+            font-family: 'Montserrat', sans-serif;
         }
-        .nav-link:hover::after {
+
+        /* --- PRELOADER MINIMALISTA --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        .hero-section {
-            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNiMxYRK9nuc8B9fNMR4_gRjdeTNhGFT9Q0CN0jIv1IodyBZLBNEvt08UDmUEZal10Rk7d0MDPuxgb3TuFfGeelEIu6Jpzr4zC4_cz4LzfDqESFF66Ng4pdKep6PqrH5E8nGvJ_5hi0GhIO2rG4LzA=w1536-h758-s-no-gm?authuser=1');
+        #preloader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNJB2FtYq1sChyGvI6sIHq03FjFxANL4oSXtdbMmz9DxN66QMSWFSshxa2kZamxBHedNc1KXXp6h_KVHFfSwx7Q0KPnes0RBlS1K-TUt9tSCi1vukxi7MuWrGztlk4kWOKOXoZlu1CELoZxWGZjSULN=w969-h869-s-no-gm?authuser=1');
             background-size: cover;
             background-position: center;
+            opacity: 0.4;
+            z-index: 1;
         }
-        /* Estilos para os modais */
-        .modal.hidden {
-            display: none;
+        #preloader::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.75);
+            z-index: 2;
         }
-        /* Estilo para a lista de projetos no modal completo */
-        .project-list-item.active {
-            background-color: #d1fae5; /* green-100 */
-            color: #047857; /* green-700 */
-            font-weight: 600;
-        }
-        /* Estilo para o botão de filtro ativo na página principal */
-        #project-filters .filter-btn.active {
-            color: #f97316; /* orange-500 */
-            font-weight: 700;
-            border-bottom: 2px solid #f97316;
-        }
-        /* Estilos para animação de scroll */
-        .animate-on-scroll {
+        #preloader-logo {
+            width: 80px;
+            color: var(--accent-color);
             opacity: 0;
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            position: relative;
+            z-index: 3;
         }
-        .animate-on-scroll.animated {
-            opacity: 1;
+
+        /* --- NAVEGAÇÃO --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            transition: background-color 0.3s ease, transform 0.4s ease-in-out;
         }
-        /* Animação para os cards de projetos */
-        #project-gallery .project-item {
-            transition: transform 0.4s ease, opacity 0.4s ease;
+        nav.scrolled {
+            background-color: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
         }
-        #project-gallery.hiding .project-item {
-            transform: scale(0.95);
-            opacity: 0;
+        nav.nav-hidden {
+            transform: translateY(-100%);
         }
-        /* Estilos para a timeline de scroll */
-        #scroll-timeline {
-            transition: opacity 0.5s ease-in-out;
+        nav a {
+            transition: color 0.3s ease;
         }
-        #scroll-timeline.visible {
-            opacity: 0.6; /* Opacidade reduzida para ser menos proeminente */
+        nav a:hover {
+            color: var(--accent-color);
         }
-        #scroll-timeline.visible:hover {
-            opacity: 1; /* Opacidade total ao passar o mouse */
+        .pulsing-contact-button {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 0 rgba(197, 165, 126, 0.7);
+            animation: pulse-wood 2.5s infinite;
         }
-        #scroll-timeline.visible .timeline-label {
-            opacity: 1;
+        .pulsing-contact-button:hover {
+            animation: none;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
         }
-        .timeline-dot {
+
+        @keyframes pulse-wood {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(197, 165, 126, 0.4);
+            }
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 8px rgba(197, 165, 126, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(197, 165, 126, 0);
+            }
+        }
+
+
+        /* --- HOME PAGE --- */
+        #home {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #home-video, #wood-veins-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #home-video {
+            z-index: 1;
+            filter: brightness(0.3);
+        }
+
+        #wood-veins-bg {
+            z-index: 2;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.08;
+        }
+
+        #wood-veins-bg path {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 1px;
+        }
+
+        #home-content-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        #home-main-text {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #home-bottom-area {
+            padding-bottom: 3rem;
+        }
+
+
+        .scroll-indicator {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .scroll-indicator span {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
+        }
+        
+        /* --- GALERIA HORIZONTAL COM MOSAICOS --- */
+        #gallery-section {
+            height: 100vh;
+            width: 300vw; /* 3 painéis */
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .gallery-panel {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5vh 5%;
+            background-color: #0a0a0a;
+        }
+        .panel-mosaic-grid {
+            width: 100%;
+            height: 85vh; /* Altura do mosaico aumentada */
+            display: grid;
+            gap: 1rem;
+        }
+
+        .mosaic-item {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--primary-color);
+        }
+        .mosaic-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .mosaic-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- SEÇÃO SOBRE --- */
+        #about {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 10vh 5%;
+        }
+        #about-image-wrapper {
+            perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
+        }
+
+        /* --- SEÇÃO DE CONTATO --- */
+        #contact-section {
+            position: relative;
+            padding: 15vh 5%;
+            background-color: #1a1a1a; /* Cor de fundo base */
+            overflow: hidden;
+        }
+
+        #contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNJB2FtYq1sChyGvI6sIHq03FjFxANL4oSXtdbMmz9DxN66QMSWFSshxa2kZamxBHedNc1KXXp6h_KVHFfSwx7Q0KPnes0RBlS1K-TUt9tSCi1vukxi7MuWrGztlk4kWOKOXoZlu1CELoZxWGZjSULN=w969-h869-s-no-gm?authuser=1');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4; /* Aumentado para mais visibilidade */
+            z-index: 1;
+        }
+
+        #contact-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.75); /* Reduzido para ver melhor a imagem */
+            z-index: 2;
+        }
+
+        #contact-section > .container {
+            position: relative;
+            z-index: 3; /* Conteúdo fica na frente de tudo */
+        }
+
+        .form-input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 0.75rem 0;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-color);
+        }
+        .submit-button {
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.75rem 2rem;
             transition: all 0.3s ease;
         }
-        .timeline-label {
-            transition: all 0.3s ease-in-out;
-            color: #4b5563; /* gray-600 */
+        .submit-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
         }
-        li.active .timeline-dot {
-            background-color: #16a34a; /* green-600 */
-            transform: scale(1.5);
+        .contact-info-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--accent-color);
         }
-        li.active .timeline-label {
-            color: #111827; /* gray-900 */
-            font-weight: 600;
+
+        /* --- MODAL DE IMAGEM --- */
+        #modal-image-container {
+            visibility: hidden; /* Controlado por GSAP */
+            opacity: 0; /* Controlado por GSAP */
         }
+        #modal-image-wrapper {
+            transform: scale(0.8); /* Estado inicial para animação */
+        }
+        #modal-image {
+            max-height: 85vh; /* Garante que a imagem cabe na altura da janela */
+        }
+        #modal-close-btn {
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            line-height: 36px;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+        #modal-close-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <!-- CABEÇALHO E NAVEGAÇÃO -->
-    <header id="header" class="bg-white shadow-md fixed top-0 left-0 w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
-            <!-- Container para o Logo que o posiciona por cima da barra -->
-            <a href="#" class="absolute top-1 left-4 sm:left-6 z-10 bg-white p-1 rounded-lg shadow-lg">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczNz7dDYKuC5jH5PJSUP4pvB31MC7JzRRz8w9k4Q37uMp4EQ9uzGubYa4OhHpfwpI0R-XIzhNYBVIwI0pSR0xpmVWAQ0EWcJ2Y9VVSu7oylzCdHHia9ueDT3Cf6nw3bxvjIqO-PuRot036FH7pOeN68=w400-h400-s-no-gm?authuser=1" alt="Logo da Construtora" class="h-16 sm:h-20 w-auto">
-            </a>
-            <!-- Placeholder para manter o espaçamento do menu -->
-            <div class="w-20 sm:w-24">&nbsp;</div>
+    <div id="preloader">
+        <svg id="preloader-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#inicio" class="nav-link text-gray-600 hover:text-green-600 font-medium">Início</a>
-                <a href="#sobre" class="nav-link text-gray-600 hover:text-green-600 font-medium">Sobre Nós</a>
-                <a href="#empreendimentos" class="nav-link text-gray-600 hover:text-green-600 font-medium">Empreendimentos</a>
-                <a href="#contato" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors">Solicite um Orçamento</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            </button>
+    <nav class="p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#home" class="font-title text-xl font-medium">Marcenaria</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#gallery-container">Projetos</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact-section" class="pulsing-contact-button">Contato</a>
+            </div>
         </div>
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <a href="#inicio" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Início</a>
-            <a href="#sobre" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Sobre Nós</a>
-            <a href="#empreendimentos" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Empreendimentos</a>
-            <a href="#contato" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Solicite um Orçamento</a>
-        </div>
-    </header>
+    </nav>
 
     <main>
-        <!-- SEÇÃO HERO -->
-        <section id="inicio" class="hero-section h-[80vh] relative">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 animate__animated animate__fadeInDown">Construindo com Qualidade</h1>
-                <p class="text-lg md:text-xl max-w-3xl mb-8 animate__animated animate__fadeInUp animate__delay-1s">Engenharia que constrói valor para o seu futuro.</p>
-                <a href="#empreendimentos" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105 animate__animated animate__pulse animate__delay-2s animate__infinite">Conheça Nossos Projetos</a>
-            </div>
-        </section>
+        <section id="home">
+            <!-- Camada de Fundo -->
+            <video id="home-video" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/141414/141414?text=.">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-carpenter-sanding-a-piece-of-wood-3215-large.mp4" type="video/mp4">
+                [Vídeo de um artesão a trabalhar numa oficina]
+            </video>
+            <svg id="wood-veins-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+                <path d="M-50 50 C 250 30, 550 120, 960 100 S 1500 40, 1970 150" />
+                <path d="M-50 120 C 350 100, 450 220, 960 200 S 1400 140, 1970 250" />
+                <path d="M300 300 C 280 310, 280 340, 300 350 C 320 340, 320 310, 300 300 Z" />
+                <path d="M300 280 C 250 325, 350 375, 300 280 Z" />
+                <path d="M-50 325 C 100 350, 200 280, 450 380 S 800 350, 960 400 S 1300 420, 1450 380 C 1550 350, 1700 450, 1970 420" />
+                <path d="M-50 480 C 250 500, 550 450, 960 500 S 1500 550, 1970 520" />
+                <path d="M1500,450 C 1450 500, 1500 550, 1550 500 C 1580 470, 1550 420, 1500 450 Z" />
+                <path d="M1500,420 Q 1400 500, 1500 580 Q 1600 500, 1500 420 Z" />
+                <path d="M1500,390 Q 1350 500, 1500 610 Q 1650 500, 1500 390 Z" />
+                <path d="M-50 600 C 350 620, 450 580, 960 620 S 1400 680, 1970 650" />
+                <path d="M350 800 C 330 820, 350 840, 370 820 C 380 810, 370 790, 350 800 Z" />
+                <path d="M350 780 Q 310 820, 350 860 Q 390 820, 350 780 Z" />
+                <path d="M-50 780 C 250 750, 550 820, 960 800 S 1500 740, 1970 850" />
+                <path d="M-50 920 C 350 900, 450 980, 960 950 S 1400 900, 1970 1000" />
+                <path d="M900 930 Q 880 940, 900 950 Q 920 940, 900 930 Z" />
+                <path d="M900 910 Q 860 940, 900 970 Q 940 940, 900 910 Z" />
+            </svg>
 
-        <!-- SEÇÃO SOBRE NÓS -->
-        <section id="sobre" class="py-16 sm:py-20 bg-white overflow-hidden -mt-20 relative z-10 rounded-t-2xl">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div class="animate-on-scroll" data-animation="animate__fadeInLeft">
-                        <img src="https://placehold.co/600x400/e2e8f0/2d3748?text=Nossa+Equipe" alt="Equipe da construtora" class="rounded-lg shadow-2xl w-5/6 mx-auto">
+            <div id="home-content-wrapper">
+                <div id="home-main-text">
+                    <div>
+                        <h1 id="main-title" class="font-title text-5xl md:text-8xl font-light text-white mb-4">Design e Matéria</h1>
+                        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light">Peças que contam histórias, esculpidas com precisão e alma.</p>
                     </div>
-                    <div class="animate-on-scroll" data-animation="animate__fadeInRight">
-                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Mais de 25 Anos de Excelência em Construção</h2>
-                        <p class="text-gray-700 mb-6 leading-relaxed">
-                           A ENIPRO ENGENHARIA, desde 1998, oferece soluções completas e inovadoras para a construção civil. Atendemos projetos comerciais, industriais e imobiliários com um compromisso de excelência, segurança e confiabilidade em todas as etapas da obra.
-                        </p>
-                        <div class="flex justify-center md:justify-start space-x-6 mb-6">
-                            <div class="text-center">
-                                <p class="text-2xl sm:text-3xl font-bold text-green-600">+50</p>
-                                <p class="text-gray-500 text-sm sm:text-base">Projetos Entregues</p>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-2xl sm:text-3xl font-bold text-green-600">+1.200</p>
-                                <p class="text-gray-500 text-sm sm:text-base">Clientes Satisfeitos</p>
-                            </div>
-                        </div>
-                        <button id="open-history-modal-btn" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105 mt-4">Conheça toda nossa história</button>
-                    </div>
+                </div>
+                <div id="home-bottom-area" class="flex flex-col items-center">
+                    <a href="#gallery-container" id="home-cta-button" class="pulsing-contact-button font-title">Conheça Nossos Projetos</a>
+                    <div class="scroll-indicator">ROLAR <span>↓</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO EMPREENDIMENTOS -->
-        <section id="empreendimentos" class="py-16 sm:py-20 bg-gray-50">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 animate-on-scroll" data-animation="animate__fadeInUp">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Nossos Empreendimentos</h2>
-                    <p class="text-gray-700 mt-2">Conheça os projetos que definem nosso padrão de qualidade.</p>
+        <div id="gallery-container" class="relative w-full overflow-hidden">
+            <section id="gallery-section">
+                <!-- Painel 1: Mesas -->
+                <div class="gallery-panel">
+                    <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Mesas</h2>
+                    <div class="panel-mosaic-grid grid-cols-3 grid-rows-3">
+                        <div class="mosaic-item md:col-span-2 row-span-2"><img src="https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de jantar de madeira numa sala de jantar iluminada]"></div>
+                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de centro de madeira com livros]"></div>
+                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/6492397/pexels-photo-6492397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um detalhe de uma mesa de madeira com grãos visíveis]"></div>
+                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de escritório de madeira com um computador portátil]"></div>
+                    </div>
                 </div>
+
+                <!-- Painel 2: Armários -->
+                <div class="gallery-panel">
+                    <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Armários</h2>
+                    <div class="panel-mosaic-grid grid-cols-4 grid-rows-3">
+                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/6585613/pexels-photo-6585613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um aparador de madeira com portas ripadas]"></div>
+                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de cozinha de madeira moderna]"></div>
+                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/6489083/pexels-photo-6489083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de madeira clara com decoração]"></div>
+                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/6585750/pexels-photo-6585750.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma estante de livros de madeira e metal]"></div>
+                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um detalhe de um puxador de armário colorido]"></div>
+                    </div>
+                </div>
+
+                <!-- Painel 3: Projetos Especiais -->
+                <div class="gallery-panel">
+                     <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Projetos Especiais</h2>
+                    <div class="panel-mosaic-grid grid-cols-3 grid-rows-4">
+                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um painel de parede de madeira ripada]"></div>
+                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/3932930/pexels-photo-3932930.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um banco de madeira com design orgânico]"></div>
+                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de cadeiras de madeira com design Eames]"></div>
+                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/1648771/pexels-photo-1648771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma cabeceira de cama de madeira personalizada]"></div>
+                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/2079438/pexels-photo-2079438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma prateleira de madeira escultural]"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="about" class="bg-black">
+            <div class="container mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-title text-4xl md:text-6xl font-light mb-6">A Essência do<br>Nosso Trabalho</h2>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Nascemos da paixão pela madeira. Para nós, cada veio, cada nó e cada tonalidade conta uma parte da história da natureza. O nosso trabalho é ouvir essa história e traduzi-la em objetos de design que sejam ao mesmo tempo funcionais e esculturais.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Utilizamos técnicas tradicionais de marcenaria aliadas a uma visão de design contemporâneo, garantindo que cada peça não seja apenas um móvel, mas uma herança.
+                    </p>
+                </div>
+                <div id="about-image-wrapper">
+                    <img src="https://piniweb.com.br/wp-content/uploads/2024/01/carpenter-cutting-mdf-board-inside-workshop-1200x600.jpg" alt="[Imagem de um carpinteiro a cortar uma placa de MDF na oficina]" class="w-full h-auto object-cover rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section">
+            <div class="container mx-auto flex flex-col items-center text-center">
                 
-                <div id="project-filters" class="flex justify-center space-x-4 md:space-x-8 mb-10 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="200">
-                    <button class="filter-btn active px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base" data-filter="residencial">Residencial</button>
-                    <button class="filter-btn text-gray-500 px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base" data-filter="comercial">Comercial</button>
-                    <button class="filter-btn text-gray-500 px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base" data-filter="industrial">Industrial</button>
-                </div>
-
-                <div id="project-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Os cards dos projetos serão inseridos aqui pelo JavaScript -->
-                </div>
-                <div class="text-center mt-12 animate-on-scroll" data-animation="animate__fadeInUp">
-                    <button id="open-all-projects-modal-btn" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-transform transform hover:scale-105">
-                        Ver Todos os Projetos
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Demais seções (Diferenciais) -->
-        <section id="diferenciais" class="py-16 sm:py-20 bg-white">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 animate-on-scroll" data-animation="animate__fadeInUp">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Nossos Diferenciais</h2>
-                    <p class="text-gray-700 mt-2">Pilares que sustentam a qualidade de cada obra.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="0">
-                        <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Qualidade Superior</h3>
-                        <p class="text-gray-700 text-sm">Utilizamos os melhores materiais e técnicas construtivas para garantir durabilidade e acabamento impecável.</p>
-                    </div>
-                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="200">
-                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Segurança em Primeiro Lugar</h3>
-                        <p class="text-gray-700 text-sm">Seguimos rigorosamente todas as normas de segurança para proteger nossos colaboradores e futuros moradores.</p>
-                    </div>
-                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="400">
-                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Inovação e Tecnologia</h3>
-                        <p class="text-gray-700 text-sm">Buscamos constantemente por soluções inovadoras que agregam valor, conforto e sustentabilidade aos projetos.</p>
-                    </div>
-                    <div class="text-center p-6 bg-gray-50 rounded-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="600">
-                         <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M22 12c0-5.52-4.48-10-10-10"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Compromisso com Prazos</h3>
-                        <p class="text-gray-700 text-sm">Planejamento e gestão eficientes que garantem a entrega dos empreendimentos dentro do prazo combinado.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- SEÇÃO CONTATO -->
-        <section id="contato" class="py-16 sm:py-20 bg-gray-100">
-            <div class="container mx-auto px-4 sm:px-6">
-                 <div class="text-center mb-12 animate-on-scroll" data-animation="animate__fadeInUp">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Entre em Contato</h2>
-                    <p class="text-gray-700 mt-2">Estamos prontos para ouvir você. Envie sua mensagem ou entre em contato pelos canais abaixo.</p>
-                </div>
-                
-                <!-- Informações de Contato Direto -->
-                <div class="max-w-6xl mx-auto mb-12 animate-on-scroll" data-animation="animate__fadeInUp" data-delay="200">
-                    <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-8 md:gap-12 text-gray-800">
-                        <!-- Telefones -->
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <div class="ml-4 text-left">
-                                <h4 class="font-semibold text-lg">Telefones</h4>
-                                <p class="text-sm sm:text-base">
-                                    <a href="tel:+551532324836" class="hover:text-orange-500 transition-colors">(15) 3232-4836</a> | 
-                                    <a href="tel:+551532321972" class="hover:text-orange-500 transition-colors">3232-1972</a>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Email -->
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                            <div class="ml-4 text-left">
-                                <h4 class="font-semibold text-lg">Email</h4>
-                                <a href="mailto:contato@enipro.com.br" class="hover:text-orange-500 transition-colors text-sm sm:text-base">contato@enipro.com.br</a>
-                            </div>
-                        </div>
-                        <!-- Localização -->
-                        <div class="flex items-start sm:items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-1 sm:mt-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            <div class="ml-4 text-left">
-                                <h4 class="font-semibold text-lg">Localização</h4>
-                                <a href="https://www.google.com/maps/search/?api=1&query=R.+Dr.+Moary+Paula+Ferraz,+60+-+Vila+Lucy,+Sorocaba+-+SP,+18043-110" target="_blank" rel="noopener noreferrer" class="hover:text-orange-500 transition-colors text-sm sm:text-base">
-                                    R. Dr. Moary Paula Ferraz, 60 - Sorocaba, SP
-                                </a>
-                            </div>
-                        </div>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-12 mb-16 text-gray-300">
+                    <a href="tel:+5511987654321" class="flex items-center gap-3 hover:text-white transition-colors">
+                        <svg class="contact-info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span>(11) 98765-4321</span>
+                    </a>
+                    <a href="mailto:contato@marcenaria.com" class="flex items-center gap-3 hover:text-white transition-colors">
+                        <svg class="contact-info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>contato@marcenaria.com</span>
+                    </a>
+                    <div class="flex items-center gap-3">
+                        <svg class="contact-info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Rua da Madeira, 123 - São Paulo</span>
                     </div>
                 </div>
 
-                <!-- Formulário de Contato -->
-                <div class="bg-white p-6 sm:p-8 md:p-12 rounded-lg shadow-xl max-w-4xl mx-auto animate-on-scroll" data-animation="animate__fadeInUp" data-delay="400">
-                    <form action="#" method="POST">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="mb-4">
-                                <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Seu nome completo" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="seu.email@exemplo.com" required>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                             <label for="subject" class="block text-gray-700 font-medium mb-2">Assunto</label>
-                             <input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Ex: Informações sobre o Residencial Vista Alegre">
-                        </div>
-                         <div class="mb-6">
-                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Digite sua mensagem aqui..." required></textarea>
-                        </div>
+                <div id="contact-text" class="max-w-2xl w-full">
+                    <h2 class="font-title text-4xl md:text-6xl font-light mb-6">Vamos Criar Algo Único?</h2>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        O seu espaço merece um projeto que reflita a sua identidade. Convidamo-lo a colaborar connosco para transformar as suas ideias em peças de madeira sob medida, com um design excecional e um acabamento impecável. Partilhe o seu projeto connosco.
+                    </p>
+                    <form action="#" method="POST" class="space-y-6 text-left">
+                        <input type="text" name="name" placeholder="O seu nome" class="form-input">
+                        <input type="email" name="email" placeholder="O seu email" class="form-input">
+                        <textarea name="message" rows="4" placeholder="Descreva a sua ideia..." class="form-input"></textarea>
                         <div class="text-center">
-                            <button type="submit" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-colors">Enviar Mensagem</button>
+                            <button type="submit" class="submit-button mt-4">Enviar Mensagem</button>
                         </div>
                     </form>
                 </div>
@@ -313,507 +513,221 @@
         </section>
     </main>
 
-    <!-- TIMELINE DE SCROLL -->
-    <nav id="scroll-timeline" class="fixed right-5 top-1/2 -translate-y-1/2 z-40 opacity-0">
-        <ul class="flex flex-col space-y-2 items-end">
-            <li class="flex items-center">
-                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Início</span>
-                <a href="#inicio" title="Início" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="inicio"></a>
-            </li>
-            <li class="flex items-center">
-                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Sobre Nós</span>
-                <a href="#sobre" title="Sobre Nós" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="sobre"></a>
-            </li>
-            <li class="flex items-center">
-                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Empreendimentos</span>
-                <a href="#empreendimentos" title="Empreendimentos" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="empreendimentos"></a>
-            </li>
-            <li class="flex items-center">
-                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Diferenciais</span>
-                <a href="#diferenciais" title="Diferenciais" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="diferenciais"></a>
-            </li>
-            <li class="flex items-center">
-                <span class="timeline-label mr-3 text-sm text-gray-700 font-medium opacity-0">Contato</span>
-                <a href="#contato" title="Contato" class="timeline-dot block w-3 h-3 bg-gray-400 rounded-full" data-section="contato"></a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- RODAPÉ -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-4 sm:px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <div>
-                    <a href="#" class="inline-block mb-4">
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNz7dDYKuC5jH5PJSUP4pvB31MC7JzRRz8w9k4Q37uMp4EQ9uzGubYa4OhHpfwpI0R-XIzhNYBVIwI0pSR0xpmVWAQ0EWcJ2Y9VVSu7oylzCdHHia9ueDT3Cf6nw3bxvjIqO-PuRot036FH7pOeN68=w400-h400-s-no-gm?authuser=1" alt="Logo da Construtora" class="h-16 sm:h-20 w-auto mx-auto md:mx-0">
-                    </a>
-                    <p class="text-gray-400 text-sm">Construindo mais que edifícios, criando lares e espaços para a vida acontecer.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
-                    <ul>
-                        <li class="mb-2"><a href="#sobre" class="text-gray-400 hover:text-white">Sobre Nós</a></li>
-                        <li class="mb-2"><a href="#empreendimentos" class="text-gray-400 hover:text-white">Empreendimentos</a></li>
-                        <li class="mb-2"><a href="#contato" class="text-gray-400 hover:text-white">Contato</a></li>
-                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Política de Privacidade</a></li>
-                    </ul>
-                </div>
-                <div>
-                     <h4 class="text-lg font-semibold mb-4">Siga-nos</h4>
-                     <div class="flex space-x-4 justify-center md:justify-start">
-                        <a href="#" class="text-gray-400 hover:text-white transition-transform transform hover:scale-125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-transform transform hover:scale-125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-transform transform hover:scale-125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                     </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 Sua Construtora. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- MODAL DE HISTÓRIA -->
-    <div id="history-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col transform transition-transform duration-300 scale-95">
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-xl font-bold text-gray-900">Nossa História</h3>
-                <button id="close-history-modal-btn" class="text-gray-500 hover:text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-            <div class="p-6 overflow-y-auto">
-                <p class="text-gray-700 leading-relaxed mb-4">Especializada no desenvolvimento de soluções completas para a construção civil, a ENIPRO ENGENHARIA transforma projetos em realidade. Nosso compromisso primordial é com a satisfação de nossos clientes e a excelência de nossa equipe, unindo técnica e inovação para construir o futuro.</p>
-                <p class="text-gray-700 leading-relaxed mb-4">Desde 1998, sob a direção de especialistas com vasta experiência no mercado, construímos uma trajetória de sucesso e credibilidade. Contamos com um time de profissionais altamente qualificados e em constante treinamento, garantindo a segurança, a confiabilidade e a qualidade superior que cada obra exige.</p>
-                <p class="text-gray-700 leading-relaxed mb-4">Com mais de 25 anos de experiência, dominamos todas as etapas do processo construtivo, desde a concepção e especificação do projeto até os ajustes finais. Atendemos com a mesma dedicação e competência empresas de pequeno, médio e grande porte nos setores comercial, industrial e de empreendimentos imobiliários.</p>
-                <p class="text-gray-700 leading-relaxed">Nosso maior orgulho é o portfólio que construímos e, principalmente, a fidelidade de nossos clientes e parceiros, que nos credenciam como uma empresa respeitada e frequentemente recomendada. Isso é resultado de uma equipe engajada, que encontra na ENIPRO um ambiente de respeito, capacitação e motivação para entregar sempre o melhor.</p>
-            </div>
+    <!-- MODAL DE IMAGEM -->
+    <div id="modal-image-container" class="fixed inset-0 bg-black bg-opacity-90 z-[100] flex justify-center items-center p-4">
+        <div id="modal-image-wrapper" class="relative bg-black p-2 rounded-lg max-w-4xl max-h-[90vh]">
+            <img id="modal-image" src="" alt="Imagem do projeto ampliada" class="w-full h-full object-contain">
+            <button id="modal-close-btn" class="absolute top-2 right-2 text-white text-3xl font-light">&times;</button>
         </div>
     </div>
-
-    <!-- MODAL SIMPLES (PARA OS CARDS DA PÁGINA INICIAL) -->
-    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row transform transition-transform duration-300 scale-95 overflow-y-auto">
-            <button id="close-modal-btn" class="absolute top-2 right-2 md:-top-3 md:-right-3 text-white bg-gray-800 rounded-full h-8 w-8 flex items-center justify-center z-10 hover:bg-red-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div class="w-full md:w-3/5 p-2 md:p-4 flex-shrink-0">
-                <div class="relative h-64 md:h-full">
-                    <img id="modal-image" src="" alt="Foto do empreendimento" class="w-full h-full rounded-lg object-cover">
-                </div>
-            </div>
-            <div class="w-full md:w-2/5 p-6 flex flex-col justify-center">
-                <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-gray-900 mb-2"></h3>
-                <p id="modal-location" class="text-md text-gray-500 mb-4"></p>
-                <p id="modal-description" class="text-gray-700 leading-relaxed"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DE TODOS OS PROJETOS (GALERIA COMPLETA) -->
-    <div id="all-projects-modal" class="modal fixed inset-0 bg-black bg-opacity-80 z-[110] flex items-center justify-center p-2 sm:p-4 transition-opacity duration-300 opacity-0 hidden">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-6xl h-[95vh] flex flex-col md:flex-row transform transition-transform duration-300 scale-95">
-             <!-- Botão de Fechar -->
-            <button id="close-all-projects-modal-btn" class="absolute top-2 right-2 md:-top-3 md:-right-3 text-white bg-gray-800 rounded-full h-8 w-8 flex items-center justify-center z-20 hover:bg-red-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-
-            <!-- Coluna da Esquerda: Lista de Projetos -->
-            <div class="w-full md:w-1/3 flex flex-col border-b md:border-b-0 md:border-r border-gray-200">
-                <div class="p-4 border-b border-gray-200">
-                    <h3 class="text-xl font-bold text-gray-800">Portfólio de Obras</h3>
-                    <div id="all-projects-filters" class="flex space-x-2 mt-3">
-                         <button class="all-projects-filter-btn flex-1 bg-green-600 text-white px-3 py-1 text-sm rounded-md" data-status-filter="all">Todos</button>
-                         <button class="all-projects-filter-btn flex-1 bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-md" data-status-filter="finalizada">Finalizadas</button>
-                         <button class="all-projects-filter-btn flex-1 bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-md" data-status-filter="projeto">Em Andamento</button>
-                    </div>
-                </div>
-                <div id="all-projects-list" class="flex-1 overflow-y-auto p-2 h-40 md:h-auto">
-                    <!-- Lista será populada pelo JS -->
-                </div>
-            </div>
-
-            <!-- Coluna da Direita: Detalhes do Projeto -->
-            <div id="all-projects-details" class="w-full md:w-2/3 flex flex-col p-4 md:p-6 overflow-y-auto">
-                <!-- Imagem Principal e Navegação -->
-                <div class="relative w-full h-48 sm:h-64 md:h-3/5 mb-4 flex-shrink-0">
-                    <img id="all-projects-image" src="https://placehold.co/800x600/e2e8f0/2d3748?text=Selecione+um+projeto" alt="Foto do empreendimento selecionado" class="w-full h-full rounded-lg object-cover">
-                    <button id="all-projects-prev-btn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                    </button>
-                    <button id="all-projects-next-btn" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition-colors">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
-                </div>
-                <!-- Descrição Fixa -->
-                <div class="flex-grow">
-                    <h3 id="all-projects-title" class="text-xl md:text-2xl font-bold text-gray-900 mb-1"></h3>
-                    <p id="all-projects-location" class="text-md text-gray-500 mb-3"></p>
-                    <p id="all-projects-description" class="text-gray-700 leading-relaxed"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        // --- BANCO DE DADOS DOS PROJETOS ---
-        const allProjects = [
-            { id: 0, title: 'Laponia', location: 'Itu, SP', category: 'industrial', status: 'finalizada', description: 'Projeto industrial de grande porte com soluções inovadoras em logística e produção. A obra foi concluída com foco em sustentabilidade e eficiência energética.', images: ['https://photos.fife.usercontent.google.com/pw/AP1GczNjPXTIql6sLoPpnWBNFDONuOMPhxzkhOMcbcBrOg6_w-veBukDIZc=w1359-h913-s-no-gm?authuser=1', 'https://lh3.googleusercontent.com/pw/AP1GczPGrCj360amtISdNhpazCh8OYak6XBHhD-EvP5yeUR98LDftPZ-9zG4qBfxmmS_r_tn_7PDPiNwU1iJaDpagc49FWxtFwh4IrK-FYlaW3gGXvE_x-U2pMdy4POdxELffGxX_Ll5mx2g2fe6IK3_coY=w886-h661-s-no-gm?authuser=1'] },
-            { id: 1, title: 'Symrise', location: 'Sorocaba, SP', category: 'industrial', status: 'finalizada', description: 'Edificação corporativa com design moderno e sustentável. O projeto incluiu laboratórios de alta tecnologia e áreas de convivência para colaboradores.', images: ['https://lh3.googleusercontent.com/pw/AP1GczPGrCj360amtISdNhpazCh8OYak6XBHhD-EvP5yeUR98LDftPZ-9zG4qBfxmmS_r_tn_7PDPiNwU1iJaDpagc49FWxtFwh4IrK-FYlaW3gGXvE_x-U2pMdy4POdxELffGxX_Ll5mx2g2fe6IK3_coY=w886-h661-s-no-gm?authuser=1', 'https://photos.fife.usercontent.google.com/pw/AP1GczNjPXTIql6sLoPpnWBNFDONuOMPhxzkhOMcbcBrOg6_w-veBukDIZc=w1359-h913-s-no-gm?authuser=1'] },
-            { id: 2, title: 'Residencial Sol Nascente', location: 'Campinas, SP', category: 'residencial', status: 'projeto', description: 'Condomínio de apartamentos em fase de projeto. Foco em áreas de lazer completas e integração com a natureza.', images: ['https://placehold.co/800x600/f97316/ffffff?text=Sol+Nascente+1', 'https://placehold.co/800x600/f97316/ffffff?text=Sol+Nascente+2'] },
-            { id: 3, title: 'Centro Comercial Plaza', location: 'Jundiaí, SP', category: 'comercial', status: 'finalizada', description: 'Complexo de lojas e escritórios entregue com sucesso, tornando-se um novo ponto de referência na cidade.', images: ['https://placehold.co/800x600/3b82f6/ffffff?text=Plaza+1', 'https://placehold.co/800x600/3b82f6/ffffff?text=Plaza+2'] },
-            { id: 4, title: 'Parque Industrial Inova', location: 'Sumaré, SP', category: 'industrial', status: 'projeto', description: 'Projeto de um parque industrial focado em empresas de tecnologia. Infraestrutura de ponta em andamento.', images: ['https://placehold.co/800x600/84cc16/ffffff?text=Inova+1', 'https://placehold.co/800x600/84cc16/ffffff?text=Inova+2'] },
-            { id: 5, title: 'Edifício Corporativo Delta', location: 'São Paulo, SP', category: 'comercial', status: 'finalizada', description: 'Torre corporativa de alto padrão na capital paulista, com certificação de sustentabilidade LEED Gold.', images: ['https://placehold.co/800x600/6366f1/ffffff?text=Delta+1', 'https://placehold.co/800x600/6366f1/ffffff?text=Delta+2'] },
-            { id: 6, title: 'Condomínio Bosque Real', location: 'Valinhos, SP', category: 'residencial', status: 'finalizada', description: 'Condomínio de casas de alto padrão entregue, com ênfase em segurança e áreas verdes preservadas.', images: ['https://placehold.co/800x600/10b981/ffffff?text=Bosque+Real+1', 'https://placehold.co/800x600/10b981/ffffff?text=Bosque+Real+2'] },
-            { id: 7, title: 'Galpão Logístico Express', location: 'Itupeva, SP', category: 'industrial', status: 'finalizada', description: 'Centro de distribuição estratégico com docas e pátio de manobra otimizados para grandes operações.', images: ['https://placehold.co/800x600/a7f3d0/000000?text=Express+1', 'https://placehold.co/800x600/a7f3d0/000000?text=Express+2'] },
-            { id: 8, title: 'Torre Médica Vitalis', location: 'Sorocaba, SP', category: 'comercial', status: 'projeto', description: 'Futuro centro médico que abrigará consultórios e clínicas, com projeto arquitetônico focado no bem-estar.', images: ['https://placehold.co/800x600/ec4899/ffffff?text=Vitalis+1', 'https://placehold.co/800x600/ec4899/ffffff?text=Vitalis+2'] },
-            { id: 9, title: 'Residencial Vista do Vale', location: 'Vinhedo, SP', category: 'residencial', status: 'projeto', description: 'Lançamento de apartamentos com vista privilegiada e conceito de clube residencial. Obras em andamento.', images: ['https://placehold.co/800x600/f59e0b/ffffff?text=Vista+do+Vale+1', 'https://placehold.co/800x600/f59e0b/ffffff?text=Vista+do+Vale+2'] },
-        ];
+    document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger);
 
-        // --- RENDERIZAÇÃO INICIAL E FILTROS DA PÁGINA PRINCIPAL ---
-        const projectGallery = document.getElementById('project-gallery');
-        const filterButtons = document.querySelectorAll('#project-filters .filter-btn');
+        // --- PRELOADER ---
+        const preloaderTl = gsap.timeline({
+            onComplete: () => {
+                gsap.to("#preloader", { opacity: 0, duration: 0.8, onComplete: () => preloader.style.display = 'none' });
+                document.body.style.overflowY = 'auto';
+            }
+        });
+        preloaderTl
+            .to("#preloader-logo", { opacity: 1, duration: 1.2 })
+            .to("#preloader-logo", { opacity: 0, duration: 0.5 }, "+=1");
 
-        function createProjectCard(project) {
-            const card = document.createElement('div');
-            card.className = `project-item ${project.category}`;
-            card.setAttribute('data-category', project.category);
-            card.innerHTML = `
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group h-full flex flex-col">
-                    <div class="relative">
-                        <img src="${project.images[0]}" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/e2e8f0/2d3748?text=Imagem+Indisponível';" 
-                             alt="${project.title}" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button class="open-modal-btn text-white text-lg font-bold cursor-pointer bg-transparent border-none" data-project-id="${project.id}">Ver Detalhes</button>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-900">${project.title}</h3>
-                        <p class="text-sm text-gray-500 mb-4">${project.location}</p>
-                        <p class="text-gray-700 text-sm flex-grow">${project.description.substring(0, 80)}...</p>
-                    </div>
-                </div>
-            `;
-            return card;
-        }
+        // --- ANIMAÇÃO DAS VEIAS DE MADEIRA ---
+        const veinPaths = document.querySelectorAll('#wood-veins-bg path');
+        veinPaths.forEach(path => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
 
-        function renderMainGallery(filter = 'residencial') {
-            projectGallery.classList.add('hiding');
-
-            setTimeout(() => {
-                projectGallery.innerHTML = '';
-                const filteredProjects = allProjects
-                    .filter(p => p.category === filter)
-                    .slice(0, 3);
-
-                filteredProjects.forEach(project => {
-                    projectGallery.appendChild(createProjectCard(project));
-                });
-                addEventListenersToModalButtons();
-                projectGallery.classList.remove('hiding');
-            }, 400); // Duração da transição
-        }
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (button.classList.contains('active')) return;
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const filter = button.getAttribute('data-filter');
-                renderMainGallery(filter);
+            gsap.to(path, {
+                strokeDashoffset: 0,
+                duration: gsap.utils.random(20, 32),
+                delay: gsap.utils.random(0, 10),
+                ease: "power1.inOut",
+                repeat: -1,
+                yoyo: true,
+                repeatDelay: gsap.utils.random(2, 6)
             });
         });
+
+        // --- ANIMAÇÃO DE ROLAGEM HORIZONTAL DA GALERIA ---
+        const gallerySection = document.getElementById('gallery-section');
+        const panels = gsap.utils.toArray(".gallery-panel");
+        const galleryAnimation = gsap.to(panels, {
+            xPercent: -100 * (panels.length - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#gallery-container",
+                pin: true,
+                scrub: 1.5,
+                snap: 1 / (panels.length - 1),
+                end: () => "+=" + (gallerySection.offsetWidth - innerWidth)
+            }
+        });
         
-        // --- LÓGICA DOS MODAIS ---
-        const projectModal = document.getElementById('project-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
+        // --- ANIMAÇÃO DOS MOSAICOS DENTRO DOS PAINÉIS ---
+        panels.forEach((panel, i) => {
+            const mosaicItems = panel.querySelectorAll('.mosaic-item');
+            gsap.from(mosaicItems, {
+                autoAlpha: 0,
+                y: 50,
+                scale: 0.9,
+                stagger: 0.08,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: panel,
+                    containerAnimation: galleryAnimation,
+                    start: 'left center',
+                    toggleActions: 'play reverse play reverse'
+                }
+            });
+        });
+
+        // --- NAVEGAÇÃO INTELIGENTE (LÓGICA CORRIGIDA) ---
+        const nav = document.querySelector('nav');
+        
+        ScrollTrigger.create({
+            start: 'top -80',
+            end: 99999,
+            toggleClass: { className: 'scrolled', targets: nav }
+        });
+
+        const showAnim = gsap.from(nav, { 
+            yPercent: -100,
+            paused: true,
+            duration: 0.2
+        }).progress(1);
+
+        ScrollTrigger.create({
+            start: "top top",
+            end: "max",
+            onUpdate: (self) => {
+                if (galleryAnimation.scrollTrigger.isActive) {
+                    showAnim.reverse();
+                } else {
+                    if (self.direction === -1) {
+                        showAnim.play();
+                    } else {
+                        showAnim.reverse();
+                    }
+                }
+            }
+        });
+        
+        // --- LÓGICA DO MODAL DE IMAGEM ---
+        const modalContainer = document.getElementById('modal-image-container');
+        const modalWrapper = document.getElementById('modal-image-wrapper');
         const modalImage = document.getElementById('modal-image');
-        const modalTitle = document.getElementById('modal-title');
-        const modalLocation = document.getElementById('modal-location');
-        const modalDescription = document.getElementById('modal-description');
-        
-        const historyModal = document.getElementById('history-modal');
-        const openHistoryModalBtn = document.getElementById('open-history-modal-btn');
-        const closeHistoryModalBtn = document.getElementById('close-history-modal-btn');
+        const closeModalBtn = document.getElementById('modal-close-btn');
+        const mosaicImages = document.querySelectorAll('.mosaic-item img');
 
-        function openSimpleModal(projectId) {
-            const project = allProjects.find(p => p.id == projectId);
-            if (!project) return;
-            
-            modalImage.src = project.images[0];
-            modalTitle.textContent = project.title;
-            modalLocation.textContent = project.location;
-            modalDescription.textContent = project.description;
-            
-            projectModal.classList.remove('hidden');
-            setTimeout(() => {
-                projectModal.classList.remove('opacity-0');
-                projectModal.querySelector('.transform').classList.remove('scale-95');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSimpleModal() {
-            projectModal.classList.add('opacity-0');
-            projectModal.querySelector('.transform').classList.add('scale-95');
-            setTimeout(() => {
-                projectModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        function openHistoryModal() {
-            historyModal.classList.remove('hidden');
-            setTimeout(() => {
-                historyModal.classList.remove('opacity-0');
-                historyModal.querySelector('.transform').classList.remove('scale-95');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeHistoryModal() {
-            historyModal.classList.add('opacity-0');
-            historyModal.querySelector('.transform').classList.add('scale-95');
-            setTimeout(() => {
-                historyModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        closeModalBtn.addEventListener('click', closeSimpleModal);
-        projectModal.addEventListener('click', (e) => {
-            if (e.target === projectModal) closeSimpleModal();
-        });
-        
-        openHistoryModalBtn.addEventListener('click', openHistoryModal);
-        closeHistoryModalBtn.addEventListener('click', closeHistoryModal);
-        historyModal.addEventListener('click', (e) => {
-            if (e.target === historyModal) closeHistoryModal();
-        });
-
-        function addEventListenersToModalButtons() {
-            document.querySelectorAll('.open-modal-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    openSimpleModal(e.target.dataset.projectId);
-                });
-            });
-        }
-
-
-        // --- LÓGICA DO MODAL DE GALERIA COMPLETA ---
-        const allProjectsModal = document.getElementById('all-projects-modal');
-        const allProjectsModalContent = allProjectsModal.querySelector('.transform');
-        const openAllProjectsBtn = document.getElementById('open-all-projects-modal-btn');
-        const closeAllProjectsBtn = document.getElementById('close-all-projects-modal-btn');
-        const allProjectsListContainer = document.getElementById('all-projects-list');
-        const allProjectsFilterBtns = document.querySelectorAll('.all-projects-filter-btn');
-
-        const detailsImage = document.getElementById('all-projects-image');
-        const detailsTitle = document.getElementById('all-projects-title');
-        const detailsLocation = document.getElementById('all-projects-location');
-        const detailsDescription = document.getElementById('all-projects-description');
-        const detailsPrevBtn = document.getElementById('all-projects-prev-btn');
-        const detailsNextBtn = document.getElementById('all-projects-next-btn');
-
-        let currentGalleryProject = null;
-        let currentGalleryImageIndex = 0;
-
-        function renderAllProjectsList(statusFilter = 'all') {
-            allProjectsListContainer.innerHTML = '';
-            const filtered = allProjects.filter(p => statusFilter === 'all' || p.status === statusFilter);
-            
-            filtered.forEach(project => {
-                const listItem = document.createElement('div');
-                listItem.className = 'project-list-item p-3 cursor-pointer hover:bg-gray-100 rounded-md transition-colors';
-                listItem.textContent = project.title;
-                listItem.dataset.projectId = project.id;
-                allProjectsListContainer.appendChild(listItem);
-            });
-            
-            allProjectsListContainer.querySelectorAll('.project-list-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const projectId = item.dataset.projectId;
-                    displayProjectDetails(projectId);
-                    allProjectsListContainer.querySelectorAll('.project-list-item').forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                });
-            });
-
-            if (filtered.length > 0) {
-                 displayProjectDetails(filtered[0].id);
-                 allProjectsListContainer.querySelector('.project-list-item').classList.add('active');
-            } else {
-                 detailsImage.src = 'https://placehold.co/800x600/e2e8f0/2d3748?text=Nenhum+projeto';
-                 detailsTitle.textContent = 'Nenhum projeto encontrado';
-                 detailsLocation.textContent = '';
-                 detailsDescription.textContent = '';
-                 currentGalleryProject = null;
-            }
-        }
-
-        function displayProjectDetails(projectId) {
-            const project = allProjects.find(p => p.id == projectId);
-            if (!project) return;
-            
-            currentGalleryProject = project;
-            currentGalleryImageIndex = 0;
-
-            detailsTitle.textContent = project.title;
-            detailsLocation.textContent = project.location;
-            detailsDescription.textContent = project.description;
-            updateGalleryImage();
-        }
-
-        function updateGalleryImage() {
-            if (!currentGalleryProject) return;
-            detailsImage.src = currentGalleryProject.images[currentGalleryImageIndex];
-        }
-        
-        detailsPrevBtn.addEventListener('click', () => {
-            if (!currentGalleryProject) return;
-            currentGalleryImageIndex = (currentGalleryImageIndex - 1 + currentGalleryProject.images.length) % currentGalleryProject.images.length;
-            updateGalleryImage();
-        });
-
-        detailsNextBtn.addEventListener('click', () => {
-            if (!currentGalleryProject) return;
-            currentGalleryImageIndex = (currentGalleryImageIndex + 1) % currentGalleryProject.images.length;
-            updateGalleryImage();
-        });
-        
-        allProjectsFilterBtns.forEach(button => {
-            button.addEventListener('click', () => {
-                allProjectsFilterBtns.forEach(btn => {
-                    btn.classList.remove('bg-green-600', 'text-white');
-                    btn.classList.add('bg-gray-200', 'text-gray-700');
-                });
-                button.classList.add('bg-green-600', 'text-white');
-                button.classList.remove('bg-gray-200', 'text-gray-700');
-                renderAllProjectsList(button.dataset.statusFilter);
+        mosaicImages.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                modalImage.src = img.src;
+                gsap.to(modalContainer, { autoAlpha: 1, duration: 0.3 });
+                gsap.fromTo(modalWrapper, {scale: 0.8}, {scale: 1, duration: 0.4, ease: 'power2.out'});
             });
         });
 
-        function openAllProjectsModal() {
-            renderAllProjectsList();
-            allProjectsModal.classList.remove('hidden');
-            setTimeout(() => {
-                allProjectsModal.classList.remove('opacity-0');
-                allProjectsModalContent.classList.remove('scale-95');
-            }, 10);
-            document.body.style.overflow = 'hidden';
+        function closeModal() {
+            gsap.to(modalContainer, { autoAlpha: 0, duration: 0.3 });
         }
 
-        function closeAllProjectsModal() {
-            allProjectsModal.classList.add('opacity-0');
-            allProjectsModalContent.classList.add('scale-95');
-            setTimeout(() => {
-                allProjectsModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        openAllProjectsBtn.addEventListener('click', openAllProjectsModal);
-        closeAllProjectsBtn.addEventListener('click', closeAllProjectsModal);
-        allProjectsModal.addEventListener('click', (e) => {
-            if (e.target === allProjectsModal) closeAllProjectsModal();
-        });
-
-        // --- ANIMAÇÃO DE SCROLL ---
-        const scrollElements = document.querySelectorAll('.animate-on-scroll');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delay = entry.target.dataset.delay || 0;
-                    setTimeout(() => {
-                        entry.target.classList.add('animated', entry.target.dataset.animation);
-                    }, delay);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        scrollElements.forEach(el => observer.observe(el));
-
-        // --- INICIALIZAÇÃO ---
-        renderMainGallery();
-
-        // Lidar com Esc para fechar qualquer modal aberto
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (!projectModal.classList.contains('hidden')) closeSimpleModal();
-                if (!allProjectsModal.classList.contains('hidden')) closeAllProjectsModal();
-                if (!historyModal.classList.contains('hidden')) closeHistoryModal();
+        closeModalBtn.addEventListener('click', closeModal);
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                closeModal();
             }
         });
 
-        // Menu Mobile (código original)
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') mobileMenu.classList.add('hidden');
+        // --- ANIMAÇÕES DE ENTRADA (SEÇÃO HOME) ---
+        const mainTitle = document.getElementById('main-title');
+        const words = mainTitle.innerText.split(' ');
+        mainTitle.innerHTML = words.map(word => `<span>${word}</span>`).join(' ');
+        
+        gsap.from(mainTitle.querySelectorAll('span'), {
+            y: 50,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1,
+            delay: 2.5,
+            ease: 'power3.out'
         });
 
-        // Efeito de scroll no header (código original)
-        const header = document.getElementById('header');
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-                header.style.top = '-100px';
-            } else {
-                header.style.top = '0';
-            }
-            if (scrollTop > 50) {
-                 header.classList.add('py-2');
-                 header.classList.remove('py-4');
-            } else {
-                 header.classList.add('py-4');
-                 header.classList.remove('py-2');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        gsap.from("#home-main-text p", { duration: 1, y: 50, opacity: 0, delay: 2.9, ease: 'power3.out' });
+        gsap.from("#home-bottom-area", { duration: 1, y: 50, opacity: 0, delay: 3.1, ease: 'power3.out' });
+        
+        // --- ANIMAÇÕES DE ENTRADA (OUTRAS SEÇÕES) ---
+        const aboutSection = document.getElementById('about');
+        const aboutImageWrapper = document.getElementById('about-image-wrapper');
+        const aboutImage = aboutImageWrapper.querySelector('img');
+
+        aboutSection.addEventListener('mousemove', (e) => {
+            const rect = aboutImageWrapper.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(aboutImage, {
+                rotationY: x * 20,
+                rotationX: -y * 20,
+                ease: 'power1.out'
+            });
+        });
+        aboutSection.addEventListener('mouseleave', () => {
+            gsap.to(aboutImage, { rotationY: 0, rotationX: 0, ease: 'power1.out' });
         });
 
-        // --- LÓGICA DA TIMELINE DE SCROLL ---
-        const timeline = document.getElementById('scroll-timeline');
-        const timelineItems = document.querySelectorAll('#scroll-timeline li');
-        const sections = document.querySelectorAll('main section[id]');
-        let scrollTimeout;
+        const aboutContent = aboutSection.querySelector("div");
+        gsap.from(aboutContent.children, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 80%",
+            }
+        });
+        gsap.from(aboutImage, {
+            opacity: 0,
+            scale: 1.05,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 80%",
+            }
+        });
 
-        function handleScroll() {
-            // Mostra a timeline
-            timeline.classList.add('visible');
+        const contactContent = document.querySelector("#contact-section");
+        gsap.from("#contact-section > .container > div:first-child", {
+             opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: "#contact-section",
+                start: "top 80%",
+            }
+        });
+        gsap.from(contactContent.querySelectorAll("#contact-text > *"), {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: "#contact-section",
+                start: "top 80%",
+            }
+        });
 
-            // Limpa o timeout anterior e define um novo para esconder a timeline
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                timeline.classList.remove('visible');
-            }, 1500); // Esconde após 1.5s de inatividade
-
-            // Atualiza o dot ativo
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                // Considera a seção ativa quando seu topo passa da metade da tela
-                if (sectionTop < window.innerHeight / 2) {
-                    currentSectionId = section.id;
-                }
-            });
-
-            timelineItems.forEach(item => {
-                const dot = item.querySelector('.timeline-dot');
-                item.classList.remove('active');
-                if (dot && dot.getAttribute('data-section') === currentSectionId) {
-                    item.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
     });
     </script>
 </body>
