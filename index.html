@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcenaria Artesanal - Design e Matéria</title>
+    <title>Marcenaria - Criamos História</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- GSAP para animações -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
 
     <!-- Fontes do Google: Montserrat para títulos, Lato para corpo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,8 +78,7 @@
             z-index: 2;
         }
         #preloader-logo {
-            width: 80px;
-            color: var(--accent-color);
+            width: 200px; 
             opacity: 0;
             position: relative;
             z-index: 3;
@@ -219,40 +218,18 @@
             60% { transform: translateY(5px); }
         }
         
-        /* --- GALERIA HORIZONTAL COM MOSAICOS --- */
-        #gallery-section {
-            height: 100vh;
-            width: 300vw; /* 3 painéis */
-            display: flex;
-            flex-wrap: nowrap;
-        }
-        .gallery-panel {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 5vh 5%;
-            background-color: #0a0a0a;
-        }
-        .panel-mosaic-grid {
-            width: 100%;
-            height: 85vh; /* Altura do mosaico aumentada */
-            display: grid;
-            gap: 1rem;
-        }
-
+        /* --- ESTILOS DA GALERIA SIMPLIFICADA --- */
         .mosaic-item {
             position: relative;
             overflow: hidden;
             background-color: var(--primary-color);
+            aspect-ratio: 1 / 1; /* Garante que os itens sejam quadrados */
         }
         .mosaic-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .mosaic-item:hover img {
             transform: scale(1.05);
@@ -260,10 +237,13 @@
 
         /* --- SEÇÃO SOBRE --- */
         #about {
+            position: relative;
+            z-index: 3;
             min-height: 80vh;
             display: flex;
             align-items: center;
             padding: 10vh 5%;
+            background-color: #000;
         }
         #about-image-wrapper {
             perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
@@ -272,6 +252,7 @@
         /* --- SEÇÃO DE CONTATO --- */
         #contact-section {
             position: relative;
+            z-index: 3;
             padding: 15vh 5%;
             background-color: #1a1a1a; /* Cor de fundo base */
             overflow: hidden;
@@ -287,7 +268,7 @@
             background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNJB2FtYq1sChyGvI6sIHq03FjFxANL4oSXtdbMmz9DxN66QMSWFSshxa2kZamxBHedNc1KXXp6h_KVHFfSwx7Q0KPnes0RBlS1K-TUt9tSCi1vukxi7MuWrGztlk4kWOKOXoZlu1CELoZxWGZjSULN=w969-h869-s-no-gm?authuser=1');
             background-size: cover;
             background-position: center;
-            opacity: 0.4; /* Aumentado para mais visibilidade */
+            opacity: 0.4;
             z-index: 1;
         }
 
@@ -298,13 +279,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 10, 0.75); /* Reduzido para ver melhor a imagem */
+            background: rgba(10, 10, 10, 0.75);
             z-index: 2;
         }
 
         #contact-section > .container {
             position: relative;
-            z-index: 3; /* Conteúdo fica na frente de tudo */
+            z-index: 3;
         }
 
         .form-input {
@@ -338,14 +319,14 @@
 
         /* --- MODAL DE IMAGEM --- */
         #modal-image-container {
-            visibility: hidden; /* Controlado por GSAP */
-            opacity: 0; /* Controlado por GSAP */
+            visibility: hidden;
+            opacity: 0;
         }
         #modal-image-wrapper {
-            transform: scale(0.8); /* Estado inicial para animação */
+            transform: scale(0.8);
         }
         #modal-image {
-            max-height: 85vh; /* Garante que a imagem cabe na altura da janela */
+            max-height: 85vh;
         }
         #modal-close-btn {
             background: rgba(0,0,0,0.5);
@@ -365,16 +346,16 @@
 <body>
 
     <div id="preloader">
-        <svg id="preloader-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <img id="preloader-logo" src="https://lh3.googleusercontent.com/pw/AP1GczO87Z0Mi6o_jLufw5HfnxcCwna-NJx7wWrGGRy6PCjk8d8iQL41uDxs6yoUzi8zRzHKOjwCGLr5rVXnE1ch3uByd3XOl-_9_RsuFvkZkJ9ELBmD-hjMW5LRRd0DImKiwaiNf5aN45IyNNdn6Q4QO_Aq=w500-h303-s-no-gm?authuser=1" alt="Logo Marcenaria Carregando">
     </div>
 
     <nav class="p-6">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#home" class="font-title text-xl font-medium">Marcenaria</a>
+            <a href="#home">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczO87Z0Mi6o_jLufw5HfnxcCwna-NJx7wWrGGRy6PCjk8d8iQL41uDxs6yoUzi8zRzHKOjwCGLr5rVXnE1ch3uByd3XOl-_9_RsuFvkZkJ9ELBmD-hjMW5LRRd0DImKiwaiNf5aN45IyNNdn6Q4QO_Aq=w500-h303-s-no-gm?authuser=1" alt="Logo Marcenaria" class="h-20">
+            </a>
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="#gallery-container">Projetos</a>
+                <a href="#projects">Projetos</a>
                 <a href="#about">Sobre</a>
                 <a href="#contact-section" class="pulsing-contact-button">Contato</a>
             </div>
@@ -391,74 +372,42 @@
             <svg id="wood-veins-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
                 <path d="M-50 50 C 250 30, 550 120, 960 100 S 1500 40, 1970 150" />
                 <path d="M-50 120 C 350 100, 450 220, 960 200 S 1400 140, 1970 250" />
-                <path d="M300 300 C 280 310, 280 340, 300 350 C 320 340, 320 310, 300 300 Z" />
-                <path d="M300 280 C 250 325, 350 375, 300 280 Z" />
                 <path d="M-50 325 C 100 350, 200 280, 450 380 S 800 350, 960 400 S 1300 420, 1450 380 C 1550 350, 1700 450, 1970 420" />
                 <path d="M-50 480 C 250 500, 550 450, 960 500 S 1500 550, 1970 520" />
-                <path d="M1500,450 C 1450 500, 1500 550, 1550 500 C 1580 470, 1550 420, 1500 450 Z" />
-                <path d="M1500,420 Q 1400 500, 1500 580 Q 1600 500, 1500 420 Z" />
-                <path d="M1500,390 Q 1350 500, 1500 610 Q 1650 500, 1500 390 Z" />
                 <path d="M-50 600 C 350 620, 450 580, 960 620 S 1400 680, 1970 650" />
-                <path d="M350 800 C 330 820, 350 840, 370 820 C 380 810, 370 790, 350 800 Z" />
-                <path d="M350 780 Q 310 820, 350 860 Q 390 820, 350 780 Z" />
                 <path d="M-50 780 C 250 750, 550 820, 960 800 S 1500 740, 1970 850" />
                 <path d="M-50 920 C 350 900, 450 980, 960 950 S 1400 900, 1970 1000" />
-                <path d="M900 930 Q 880 940, 900 950 Q 920 940, 900 930 Z" />
-                <path d="M900 910 Q 860 940, 900 970 Q 940 940, 900 910 Z" />
             </svg>
 
             <div id="home-content-wrapper">
                 <div id="home-main-text">
                     <div>
-                        <h1 id="main-title" class="font-title text-5xl md:text-8xl font-light text-white mb-4">Design e Matéria</h1>
-                        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light">Peças que contam histórias, esculpidas com precisão e alma.</p>
+                        <h1 id="main-title" class="font-title text-5xl md:text-8xl font-light text-white mb-4">Criamos História</h1>
+                        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light">Ambientes e móveis que se tornam o cenário dos seus momentos mais preciosos e o reflexo do seu legado.</p>
                     </div>
                 </div>
                 <div id="home-bottom-area" class="flex flex-col items-center">
-                    <a href="#gallery-container" id="home-cta-button" class="pulsing-contact-button font-title">Conheça Nossos Projetos</a>
+                    <a href="#projects" id="home-cta-button" class="pulsing-contact-button font-title">Conheça Nossos Projetos</a>
                     <div class="scroll-indicator">ROLAR <span>↓</span></div>
                 </div>
             </div>
         </section>
 
-        <div id="gallery-container" class="relative w-full overflow-hidden">
-            <section id="gallery-section">
-                <!-- Painel 1: Mesas -->
-                <div class="gallery-panel">
-                    <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Mesas</h2>
-                    <div class="panel-mosaic-grid grid-cols-3 grid-rows-3">
-                        <div class="mosaic-item md:col-span-2 row-span-2"><img src="https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de jantar de madeira numa sala de jantar iluminada]"></div>
-                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de centro de madeira com livros]"></div>
-                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/6492397/pexels-photo-6492397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um detalhe de uma mesa de madeira com grãos visíveis]"></div>
-                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de escritório de madeira com um computador portátil]"></div>
-                    </div>
+        <!-- SEÇÃO DE PROJETOS SIMPLIFICADA -->
+        <section id="projects" class="py-20 px-4 bg-black">
+            <div class="container mx-auto">
+                <h2 class="font-title text-4xl md:text-6xl font-light mb-12 text-center">Nossos Projetos</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 6 Fotos Selecionadas -->
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de jantar de madeira numa sala de jantar iluminada]"></div>
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de centro de madeira com livros]"></div>
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/6585613/pexels-photo-6585613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um aparador de madeira com portas ripadas]"></div>
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de cozinha de madeira moderna]"></div>
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um painel de parede de madeira ripada]"></div>
+                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/3932930/pexels-photo-3932930.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um banco de madeira com design orgânico]"></div>
                 </div>
-
-                <!-- Painel 2: Armários -->
-                <div class="gallery-panel">
-                    <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Armários</h2>
-                    <div class="panel-mosaic-grid grid-cols-4 grid-rows-3">
-                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/6585613/pexels-photo-6585613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um aparador de madeira com portas ripadas]"></div>
-                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de cozinha de madeira moderna]"></div>
-                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/6489083/pexels-photo-6489083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de madeira clara com decoração]"></div>
-                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/6585750/pexels-photo-6585750.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma estante de livros de madeira e metal]"></div>
-                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um detalhe de um puxador de armário colorido]"></div>
-                    </div>
-                </div>
-
-                <!-- Painel 3: Projetos Especiais -->
-                <div class="gallery-panel">
-                     <h2 class="font-title text-4xl md:text-6xl font-light mb-8 text-center">Projetos Especiais</h2>
-                    <div class="panel-mosaic-grid grid-cols-3 grid-rows-4">
-                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um painel de parede de madeira ripada]"></div>
-                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/3932930/pexels-photo-3932930.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um banco de madeira com design orgânico]"></div>
-                        <div class="mosaic-item"><img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de cadeiras de madeira com design Eames]"></div>
-                        <div class="mosaic-item md:row-span-2"><img src="https://images.pexels.com/photos/1648771/pexels-photo-1648771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma cabeceira de cama de madeira personalizada]"></div>
-                        <div class="mosaic-item md:col-span-2"><img src="https://images.pexels.com/photos/2079438/pexels-photo-2079438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma prateleira de madeira escultural]"></div>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
         <section id="about" class="bg-black">
             <div class="container mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -528,13 +477,13 @@
         // --- PRELOADER ---
         const preloaderTl = gsap.timeline({
             onComplete: () => {
-                gsap.to("#preloader", { opacity: 0, duration: 0.8, onComplete: () => preloader.style.display = 'none' });
+                gsap.to("#preloader", { opacity: 0, duration: 0.5, onComplete: () => preloader.style.display = 'none' });
                 document.body.style.overflowY = 'auto';
             }
         });
         preloaderTl
-            .to("#preloader-logo", { opacity: 1, duration: 1.2 })
-            .to("#preloader-logo", { opacity: 0, duration: 0.5 }, "+=1");
+            .to("#preloader-logo", { opacity: 1, duration: 0.8 })
+            .to("#preloader-logo", { opacity: 0, duration: 0.4 }, "+=0.5");
 
         // --- ANIMAÇÃO DAS VEIAS DE MADEIRA ---
         const veinPaths = document.querySelectorAll('#wood-veins-bg path');
@@ -545,79 +494,34 @@
 
             gsap.to(path, {
                 strokeDashoffset: 0,
-                duration: gsap.utils.random(20, 32),
-                delay: gsap.utils.random(0, 10),
+                duration: gsap.utils.random(15, 25),
+                delay: gsap.utils.random(0, 5),
                 ease: "power1.inOut",
                 repeat: -1,
                 yoyo: true,
-                repeatDelay: gsap.utils.random(2, 6)
+                repeatDelay: gsap.utils.random(1, 4)
             });
         });
 
-        // --- ANIMAÇÃO DE ROLAGEM HORIZONTAL DA GALERIA ---
-        const gallerySection = document.getElementById('gallery-section');
-        const panels = gsap.utils.toArray(".gallery-panel");
-        const galleryAnimation = gsap.to(panels, {
-            xPercent: -100 * (panels.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#gallery-container",
-                pin: true,
-                scrub: 1.5,
-                snap: 1 / (panels.length - 1),
-                end: () => "+=" + (gallerySection.offsetWidth - innerWidth)
-            }
-        });
-        
-        // --- ANIMAÇÃO DOS MOSAICOS DENTRO DOS PAINÉIS ---
-        panels.forEach((panel, i) => {
-            const mosaicItems = panel.querySelectorAll('.mosaic-item');
-            gsap.from(mosaicItems, {
-                autoAlpha: 0,
-                y: 50,
-                scale: 0.9,
-                stagger: 0.08,
-                duration: 0.8,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: panel,
-                    containerAnimation: galleryAnimation,
-                    start: 'left center',
-                    toggleActions: 'play reverse play reverse'
-                }
-            });
-        });
-
-        // --- NAVEGAÇÃO INTELIGENTE (LÓGICA CORRIGIDA) ---
+        // --- NAVEGAÇÃO INTELIGENTE ---
         const nav = document.querySelector('nav');
-        
-        ScrollTrigger.create({
-            start: 'top -80',
-            end: 99999,
-            toggleClass: { className: 'scrolled', targets: nav }
-        });
-
-        const showAnim = gsap.from(nav, { 
-            yPercent: -100,
-            paused: true,
-            duration: 0.2
-        }).progress(1);
-
-        ScrollTrigger.create({
-            start: "top top",
-            end: "max",
-            onUpdate: (self) => {
-                if (galleryAnimation.scrollTrigger.isActive) {
-                    showAnim.reverse();
-                } else {
-                    if (self.direction === -1) {
-                        showAnim.play();
-                    } else {
-                        showAnim.reverse();
-                    }
-                }
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll para baixo
+                nav.classList.add('nav-hidden');
+            } else {
+                // Scroll para cima
+                nav.classList.remove('nav-hidden');
             }
-        });
+            if (scrollTop > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
         
         // --- LÓGICA DO MODAL DE IMAGEM ---
         const modalContainer = document.getElementById('modal-image-container');
@@ -630,13 +534,13 @@
             img.style.cursor = 'pointer';
             img.addEventListener('click', () => {
                 modalImage.src = img.src;
-                gsap.to(modalContainer, { autoAlpha: 1, duration: 0.3 });
-                gsap.fromTo(modalWrapper, {scale: 0.8}, {scale: 1, duration: 0.4, ease: 'power2.out'});
+                gsap.to(modalContainer, { autoAlpha: 1, duration: 0.25 });
+                gsap.fromTo(modalWrapper, {scale: 0.9}, {scale: 1, duration: 0.25, ease: 'power2.out'});
             });
         });
 
         function closeModal() {
-            gsap.to(modalContainer, { autoAlpha: 0, duration: 0.3 });
+            gsap.to(modalContainer, { autoAlpha: 0, duration: 0.25 });
         }
 
         closeModalBtn.addEventListener('click', closeModal);
@@ -652,18 +556,32 @@
         mainTitle.innerHTML = words.map(word => `<span>${word}</span>`).join(' ');
         
         gsap.from(mainTitle.querySelectorAll('span'), {
-            y: 50,
+            y: 40,
             opacity: 0,
-            stagger: 0.15,
-            duration: 1,
-            delay: 2.5,
+            stagger: 0.1,
+            duration: 0.8,
+            delay: 1.5,
             ease: 'power3.out'
         });
 
-        gsap.from("#home-main-text p", { duration: 1, y: 50, opacity: 0, delay: 2.9, ease: 'power3.out' });
-        gsap.from("#home-bottom-area", { duration: 1, y: 50, opacity: 0, delay: 3.1, ease: 'power3.out' });
+        gsap.from("#home-main-text p", { duration: 0.8, y: 40, opacity: 0, delay: 1.8, ease: 'power3.out' });
+        gsap.from("#home-bottom-area", { duration: 0.8, y: 40, opacity: 0, delay: 2.0, ease: 'power3.out' });
         
         // --- ANIMAÇÕES DE ENTRADA (OUTRAS SEÇÕES) ---
+        gsap.utils.toArray('section:not(#home)').forEach(section => {
+            gsap.from(section.querySelectorAll(".container > *"), {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%",
+                }
+            });
+        });
+
         const aboutSection = document.getElementById('about');
         const aboutImageWrapper = document.getElementById('about-image-wrapper');
         const aboutImage = aboutImageWrapper.querySelector('img');
@@ -673,59 +591,13 @@
             const x = (e.clientX - rect.left) / rect.width - 0.5;
             const y = (e.clientY - rect.top) / rect.height - 0.5;
             gsap.to(aboutImage, {
-                rotationY: x * 20,
-                rotationX: -y * 20,
+                rotationY: x * 15,
+                rotationX: -y * 15,
                 ease: 'power1.out'
             });
         });
         aboutSection.addEventListener('mouseleave', () => {
             gsap.to(aboutImage, { rotationY: 0, rotationX: 0, ease: 'power1.out' });
-        });
-
-        const aboutContent = aboutSection.querySelector("div");
-        gsap.from(aboutContent.children, {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: "#about",
-                start: "top 80%",
-            }
-        });
-        gsap.from(aboutImage, {
-            opacity: 0,
-            scale: 1.05,
-            duration: 1.2,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: "#about",
-                start: "top 80%",
-            }
-        });
-
-        const contactContent = document.querySelector("#contact-section");
-        gsap.from("#contact-section > .container > div:first-child", {
-             opacity: 0,
-            y: 30,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: "#contact-section",
-                start: "top 80%",
-            }
-        });
-        gsap.from(contactContent.querySelectorAll("#contact-text > *"), {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: "#contact-section",
-                start: "top 80%",
-            }
         });
 
     });
