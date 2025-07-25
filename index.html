@@ -40,7 +40,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* --- PRELOADER MINIMALISTA --- */
+        /* --- PRELOADER COM VÍDEO --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -54,34 +54,18 @@
             align-items: center;
             overflow: hidden;
         }
-        #preloader::before {
-            content: '';
+        #preloader-video {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNJB2FtYq1sChyGvI6sIHq03FjFxANL4oSXtdbMmz9DxN66QMSWFSshxa2kZamxBHedNc1KXXp6h_KVHFfSwx7Q0KPnes0RBlS1K-TUt9tSCi1vukxi7MuWrGztlk4kWOKOXoZlu1CELoZxWGZjSULN=w969-h869-s-no-gm?authuser=1');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             z-index: 1;
-        }
-        #preloader::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.75);
-            z-index: 2;
-        }
-        #preloader-logo {
-            width: 200px; 
-            opacity: 0;
-            position: relative;
-            z-index: 3;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            filter: brightness(0.6);
         }
 
         /* --- NAVEGAÇÃO --- */
@@ -145,31 +129,29 @@
             overflow: hidden;
         }
 
-        #home-video, #wood-veins-bg {
+        #home::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-        }
-
-        #home-video {
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczNJB2FtYq1sChyGvI6sIHq03FjFxANL4oSXtdbMmz9DxN66QMSWFSshxa2kZamxBHedNc1KXXp6h_KVHFfSwx7Q0KPnes0RBlS1K-TUt9tSCi1vukxi7MuWrGztlk4kWOKOXoZlu1CELoZxWGZjSULN=w969-h869-s-no-gm?authuser=1');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
             z-index: 1;
-            filter: brightness(0.3);
         }
 
-        #wood-veins-bg {
+        #home::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.75);
             z-index: 2;
-            pointer-events: none;
-            mix-blend-mode: screen;
-            opacity: 0.08;
-        }
-
-        #wood-veins-bg path {
-            fill: none;
-            stroke: var(--accent-color);
-            stroke-width: 1px;
         }
 
         #home-content-wrapper {
@@ -340,13 +322,41 @@
         #modal-close-btn:hover {
             background: rgba(0,0,0,0.8);
         }
+
+        /* --- BOTÃO WHATSAPP --- */
+        #whatsapp-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            z-index: 90;
+            transition: transform 0.3s ease;
+            background-color: #25D366; /* Cor do WhatsApp */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+        #whatsapp-button svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff; /* Cor do ícone */
+        }
         
     </style>
 </head>
 <body>
 
     <div id="preloader">
-        <img id="preloader-logo" src="https://lh3.googleusercontent.com/pw/AP1GczO87Z0Mi6o_jLufw5HfnxcCwna-NJx7wWrGGRy6PCjk8d8iQL41uDxs6yoUzi8zRzHKOjwCGLr5rVXnE1ch3uByd3XOl-_9_RsuFvkZkJ9ELBmD-hjMW5LRRd0DImKiwaiNf5aN45IyNNdn6Q4QO_Aq=w500-h303-s-no-gm?authuser=1" alt="Logo Marcenaria Carregando">
+        <video id="preloader-video" autoplay loop muted playsinline>
+            <source src="preloader.mp4" type="video/mp4">
+            [Vídeo de carregamento]
+        </video>
     </div>
 
     <nav class="p-6">
@@ -364,21 +374,7 @@
 
     <main>
         <section id="home">
-            <!-- Camada de Fundo -->
-            <video id="home-video" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/141414/141414?text=.">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-carpenter-sanding-a-piece-of-wood-3215-large.mp4" type="video/mp4">
-                [Vídeo de um artesão a trabalhar numa oficina]
-            </video>
-            <svg id="wood-veins-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-                <path d="M-50 50 C 250 30, 550 120, 960 100 S 1500 40, 1970 150" />
-                <path d="M-50 120 C 350 100, 450 220, 960 200 S 1400 140, 1970 250" />
-                <path d="M-50 325 C 100 350, 200 280, 450 380 S 800 350, 960 400 S 1300 420, 1450 380 C 1550 350, 1700 450, 1970 420" />
-                <path d="M-50 480 C 250 500, 550 450, 960 500 S 1500 550, 1970 520" />
-                <path d="M-50 600 C 350 620, 450 580, 960 620 S 1400 680, 1970 650" />
-                <path d="M-50 780 C 250 750, 550 820, 960 800 S 1500 740, 1970 850" />
-                <path d="M-50 920 C 350 900, 450 980, 960 950 S 1400 900, 1970 1000" />
-            </svg>
-
+            <!-- O fundo agora é controlado via CSS -->
             <div id="home-content-wrapper">
                 <div id="home-main-text">
                     <div>
@@ -399,12 +395,12 @@
                 <h2 class="font-title text-4xl md:text-6xl font-light mb-12 text-center">Nossos Projetos</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- 6 Fotos Selecionadas -->
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de jantar de madeira numa sala de jantar iluminada]"></div>
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de uma mesa de centro de madeira com livros]"></div>
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/6585613/pexels-photo-6585613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um aparador de madeira com portas ripadas]"></div>
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um armário de cozinha de madeira moderna]"></div>
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um painel de parede de madeira ripada]"></div>
-                    <div class="mosaic-item"><img src="https://images.pexels.com/photos/3932930/pexels-photo-3932930.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="[Imagem de um banco de madeira com design orgânico]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczPkkWK8N0I3UPqN6--U20iJVKBPbU4pre_eAKwpvpAjRum2imekH-G9HZOaMoncZ0OtGMFPmqyCPLBz3ens6Hkzm8daSeFGk7QskCHUbpwYE5qZC1tCD-OzJb3MmN6AjvdIMlf6g27QFUPkneg867NAJQ=w1159-h869-s-no-gm?authuser=0" alt="[Projeto 1]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczP0cD8FrpYnhhO7oYJlwXIpRN-c7mPCZWQ4NB0NAw1hBU2B4CIoRsrlMGvx8iY29lDaQsdu9_BsxN499HCirIzT3smMNkvicXB-OO93yQyXHaH-LvZb6m69PdKC9nPBCuyIPhX2EnvmYI-83BSvxsOfHQ=w651-h869-s-no-gm?authuser=0" alt="[Projeto 2]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczMOkaz6_FiYBiumLd8w1dslIJVDoA1YkTdUWUFw3jtUX0IDOMiq3TVnH5Tv0fxQDFqFF8hxGtRh8ar7EfQKubZF-AD0g5Rdm5RFptCBi5F32oz2WojtNGTYDyx6tDhAFdXydDcmonRiSlgxrejQth1mPw=w1155-h869-s-no-gm?authuser=0" alt="[Projeto 3]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczOvD3DPB0BHngYQDrklYHpZjbHZLM-O21odLOqwbDKCnEpOVNCevHj_FpfNwx0E72-7ORsGKzt5dkzBUiNreq8VERgCBqpgwQ4il4OD6hHEn3sI3ruXmh3J2lrkV_zc4Ck36d80_dVhg16pzanAqTnngA=w654-h869-s-no-gm?authuser=0" alt="[Projeto 4]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczOW-n-GvAmAL6fagmMJCamYLsa0FYSF51iIC5xGeJ--XS3CfjDWHIYkiTLqUXpIyB6HaUd9fzPuTAjplR-Bvsq2W7EESI_xkamwP2Fk5RKZXZnm9cJ07R9tJc09A5f-Zo1LpxqT0T1fFnRtq8AxHeWe6Q=w654-h869-s-no-gm?authuser=0" alt="[Projeto 5]"></div>
+                    <div class="mosaic-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczNbDFt-JY9gsGmV-7PHuQT7keKjRqHArucTd8p7o86tNe-F1wgO5c87haCx3SBPuxEwhGz5vdQ4gclCyQDgleKH_2KmsEMIp0b08SlacekwNH-U8QI_5dHQ5bVt0rwIKpFu1gOfxvmiZ6cu-yVlEBlCwg=w654-h869-s-no-gm?authuser=0" alt="[Projeto 6]"></div>
                 </div>
             </div>
         </section>
@@ -470,37 +466,31 @@
         </div>
     </div>
     
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5511987654321" target="_blank" id="whatsapp-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <path d="M38.6 34.3c-1.6-1.3-2.6-2.2-3.6-2.2-1 0-1.6.9-2.6 2.2s-1.6 2.4-3.2 2.2c-1.6-.2-4.9-1.8-8.6-5.4s-6.2-6.5-6.4-8.1c-.2-1.6 1-2.6 2.2-3.6s2.2-1.6 2.2-2.6-.9-1.6-2.2-3.2-2.4-1.6-2.2-3.2.9-2.9 1.6-3.6 1.6-1 2.9-1h.2c1.3 0 2.9.9 3.9 2.9s1.6 4.9 1.8 5.4c.2.5 0 1.3-.2 1.9s-.4.9-.7 1.3c-.3.4-.7.7-1.2.9s-1 .4-1.3.2c-.3-.2-.9-.4-1.3-.7s-1.3-1-2.2-2.2c-.9-1.2-1.8-2.4-2.1-2.9-.3-.5-.6-1.3-.6-1.6s.2-1 .4-1.3c.2-.3.7-.7 1.2-.9s.9-.2 1.3 0c.4.2.9.7 1.3 1.3s1 1.3 1.6 2.2c.6.9 1.3 1.8 1.9 2.4s1.3.9 1.9 1c.6.1 1.3 0 1.9-.4.6-.4 1.3-.9 1.9-1.6.6-.7 1.3-1.3 1.9-1.9.6-.6 1.3-1.2 1.9-1.6.6-.4 1.3-.6 1.9-.6s1.3.1 1.9.4c.6.3 1.2.7 1.6 1.3.4.6.7 1.2.9 1.9s.1 1.3-.1 1.9c-.2.6-.6 1.2-1.2 1.8s-1.2 1-1.9.9z" fill="#fff"/>
+            <path d="M24 4C12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20S35.1 4 24 4zm0 36c-8.8 0-16-7.2-16-16S15.2 8 24 8s16 7.2 16 16-7.2 16-16 16z" fill="#fff"/>
+            <path d="M38.6 34.3c-1.6-1.3-2.6-2.2-3.6-2.2-1 0-1.6.9-2.6 2.2s-1.6 2.4-3.2 2.2c-1.6-.2-4.9-1.8-8.6-5.4s-6.2-6.5-6.4-8.1c-.2-1.6 1-2.6 2.2-3.6s2.2-1.6 2.2-2.6-.9-1.6-2.2-3.2-2.4-1.6-2.2-3.2.9-2.9 1.6-3.6 1.6-1 2.9-1h.2c1.3 0 2.9.9 3.9 2.9s1.6 4.9 1.8 5.4c.2.5 0 1.3-.2 1.9s-.4.9-.7 1.3c-.3.4-.7.7-1.2.9s-1 .4-1.3.2c-.3-.2-.9-.4-1.3-.7s-1.3-1-2.2-2.2c-.9-1.2-1.8-2.4-2.1-2.9-.3-.5-.6-1.3-.6-1.6s.2-1 .4-1.3c.2-.3.7-.7 1.2-.9s.9-.2 1.3 0c.4.2.9.7 1.3 1.3s1 1.3 1.6 2.2c.6.9 1.3 1.8 1.9 2.4s1.3.9 1.9 1c.6.1 1.3 0 1.9-.4.6-.4 1.3-.9 1.9-1.6.6-.7 1.3-1.3 1.9-1.9.6-.6 1.3-1.2 1.9-1.6.6-.4 1.3-.6 1.9-.6s1.3.1 1.9.4c.6.3 1.2.7 1.6 1.3.4.6.7 1.2.9 1.9s.1 1.3-.1 1.9c-.2.6-.6 1.2-1.2 1.8s-1.2 1-1.9.9z" fill="#4CAF50"/>
+        </svg>
+    </a>
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         gsap.registerPlugin(ScrollTrigger);
 
         // --- PRELOADER ---
-        const preloaderTl = gsap.timeline({
+        const preloader = document.getElementById('preloader');
+        // Espera 4 segundos e depois faz o fade out
+        gsap.to(preloader, {
+            delay: 4, 
+            duration: 1,
+            opacity: 0,
+            ease: "power2.inOut",
             onComplete: () => {
-                gsap.to("#preloader", { opacity: 0, duration: 0.5, onComplete: () => preloader.style.display = 'none' });
-                document.body.style.overflowY = 'auto';
+                preloader.style.display = 'none';
+                document.body.style.overflowY = 'auto'; // Permite a rolagem
             }
-        });
-        preloaderTl
-            .to("#preloader-logo", { opacity: 1, duration: 0.8 })
-            .to("#preloader-logo", { opacity: 0, duration: 0.4 }, "+=0.5");
-
-        // --- ANIMAÇÃO DAS VEIAS DE MADEIRA ---
-        const veinPaths = document.querySelectorAll('#wood-veins-bg path');
-        veinPaths.forEach(path => {
-            const length = path.getTotalLength();
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-
-            gsap.to(path, {
-                strokeDashoffset: 0,
-                duration: gsap.utils.random(15, 25),
-                delay: gsap.utils.random(0, 5),
-                ease: "power1.inOut",
-                repeat: -1,
-                yoyo: true,
-                repeatDelay: gsap.utils.random(1, 4)
-            });
         });
 
         // --- NAVEGAÇÃO INTELIGENTE ---
